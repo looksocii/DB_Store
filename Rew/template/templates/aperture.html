@@ -1,0 +1,67 @@
+{% extends "nav.html" %}
+{% load static %}
+{% block sidebar %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <img class=" aperture rounded img-fluid" src="{% static 'panorama.jpg' %}" alt="">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-5 mt-3 p-5">
+            <h3 class="m-5">You want to book this aperture</h3>
+            <form action="">
+                <button type="submit" class="btn btn-5 btn-light mt-3 mx-10">Submit</button>
+            </form>
+        </div>
+        <div class="col-7">
+            <div class="row form">
+                <div class="form-group col-3">
+                    <div class="row justify-content-end mr-5 mb-3">
+                        <label for="inputPassword" class="input">ชื่อผู้จัดการบริษัท</label>
+                    </div>
+                    <div class="row justify-content-end mr-5 mb-3">
+                        <label for="inputPassword" class="input">นามสกุลผู้จัดการ</label>
+                    </div>
+                    <div class="row justify-content-end mr-5 mb-3">
+                        <label for="inputPassword" class="input">ตำแหน่ง</label>
+                    </div>
+                </div>
+                <div class="form-group col-3 ml-auto">
+                    <div class="row mb-3">
+                        <p class="text-muted">**************</p>
+                    </div>
+                    <div class="row mb-3">
+                        <p class="text-muted">**************</p>
+                    </div>
+                    <div class="row mb-3">
+                        <p class="text-muted">**************</p>
+                    </div>
+                </div>
+                <div class="form-group col-3">
+                    <div class="row justify-content-end mr-5 mb-3">
+                        <label for="inputPassword" class="input">ชื่อผู้จัดการบริษัท</label>
+                    </div>
+                    <div class="row justify-content-end mr-5 mb-3">
+                        <label for="inputPassword" class="input">นามสกุลผู้จัดการ</label>
+                    </div>
+                    <div class="row justify-content-end mr-5 mb-3">
+                        <label for="inputPassword" class="input">ตำแหน่ง</label>
+                    </div>
+                </div>
+                <div class="form-group col-3 ml-auto">
+                    <div class="row mb-3">
+                        <p class="text-muted">**************</p>
+                    </div>
+                    <div class="row mb-3">
+                        <p class="text-muted">**************</p>
+                    </div>
+                    <div class="row mb-3">
+                        <p class="text-muted">**************</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock sidebar %}
