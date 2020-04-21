@@ -1,0 +1,298 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <title>Document</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <a class="navbar-brand text-white" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link text-dark" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled text-white" href="#">Register</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <div class="store_box">
+         <h1>NAME</h1>
+         <a href="Account02.html"><button class="button" >Button</button></a>
+         
+
+        </div>
+        <div class="pic_box">
+
+          <div id="slideshow">
+            <div class="slide-wrapper">
+              <div class="slide">
+               <img src="https://static.thenounproject.com/png/145685-200.png">
+              </div>
+              <div class="slide">
+                  <img src="https://static.thenounproject.com/png/145685-200.png">
+              </div>
+              <div class="slide">
+                  <img src="https://static.thenounproject.com/png/145685-200.png">
+              </div>
+              <div class="slide">
+                  <img src="https://static.thenounproject.com/png/145685-200.png">
+              </div>
+              <div class="slide">
+                  <img src="https://static.thenounproject.com/png/145685-200.png">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-6">
+            <table id="customers">
+                
+                <tr>
+                  <td>ค่าไฟ</td>
+                  <td>xxxxxxx</td>
+                  
+                </tr>
+                <tr>
+                  <td>ค่าน้ำ</td>
+                  <td>xxxxxxx</td>
+                  
+                </tr>
+                <tr>
+                  <td>ค่าเช่าพื้นที่</td>
+                  <td>xxxxxxx</td>
+                  
+                </tr>
+                <tr>
+                  <td>ค่าซ่อมเเซม</td>
+                  <td>xxxxxxx</td>
+                 
+                </tr>
+                <tr>
+                  <td>ค่าประกัน</td>
+                  <td>xxxxxxx</td>
+                 
+                </tr>
+                <tr>
+                  <td>ค่าใช้จ่ายอื่นๆ</td>
+                  <td>xxxxxxx</td>
+               
+                </tr>
+                <tr>
+                  <td>วันที่สร้างบิล	</td>
+                  <td>xxxxxxx</td>
+                  
+                </tr>
+                <!-- <tr>
+                  <td>Magazzini Alimentari Riuniti</td>
+                  <td>Giovanni Rovelli</td>
+                 
+                </tr>
+                <tr>
+                  <td>North/South</td>
+                  <td>Simon Crowther</td>
+                
+                </tr>
+                <tr>
+                  <td>Paris spécialités</td>
+                  <td>Marie Bertrand</td>
+                 
+                </tr> -->
+              </table>
+              <br>
+              <br>
+              <!-- <button class="button button5">SAVE</button> -->
+        </div>
+      </div>
+</body>
+<style>
+  
+  h1{
+    text-align: center;
+    margin-top: 20%;
+  }
+  #customers {
+  margin-top:10px; 
+  width: 550px;
+  text-align: center;
+}
+
+#customers td, #customers th {
+  border: 2px solid black;
+  padding: 15px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+  #slideshow {
+    overflow: hidden;
+    height: 250px;
+    width: 450px;
+    margin: 22px 20px;
+    text-align: center;
+    
+  }
+
+  .slide-wrapper {
+    width: 2912px;
+    -webkit-animation: slide 18s ease infinite;
+  }
+
+  .slide {
+    float: left;
+    height: 250px;
+    width: 450px;
+  }
+
+  .slide:nth-child(1) {
+    background: #d93b65;
+  }
+
+  .slide:nth-child(2) {
+    background: #037e8c;
+  }
+
+  .slide:nth-child(3) {
+    background: #36bf66;
+  }
+
+  .slide:nth-child(4) {
+    background: #d9d055;
+  }
+
+  .slide-number {
+    color: #000;
+    text-align: center;
+    font-size: 10em;
+  }
+
+  @-webkit-keyframes slide {
+    20% {
+      margin-left: 0px;
+    }
+
+    30% {
+      margin-left: -450px;
+    }
+
+    50% {
+      margin-left: -450px;
+    }
+
+    60% {
+      margin-left: -900px;
+    }
+
+    70% {
+      margin-left: -900px;
+    }
+
+    80% {
+      margin-left: -1350px;
+    }
+
+    90% {
+      margin-left: -1350px;
+    }
+  }
+
+  /* p{
+    color: black;
+  }
+  h5{
+    color: black; */
+  .button {
+    background-color: #ffa834;
+    border: none;
+    color: white;
+    padding: 6px 142px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 1px 75px;
+    cursor: pointer;
+    border-radius: 3%;
+    transition-duration: 0.4s;
+  }
+
+  .button:hover {
+    background-color: black;
+    color: white;
+  }
+
+  .navbar-nav {
+    margin-left: 80%;
+  }
+
+  .store_box {
+
+    background-color: gray;
+    width: 500px;
+    height: 300px;
+    margin-left: -150px;
+    margin-top: 10px;
+    border-style: dashed;
+    color: white;
+    border-color: #000;
+
+  }
+
+  .pic_box {
+    background-color: whitesmoke;
+    width: 500px;
+    height: 300px;
+    margin-left: -150px;
+    margin-top: 6px;
+    border-style: dashed;
+
+  }
+  .button5 {
+  background-color: white;
+  color: black;
+  border: 2px solid #555555;
+  margin-left: 40%;
+}
+
+.button5:hover {
+  background-color: #555555;
+  color: white;
+}
+</style>
+<script>
+
+
+</script>
+
+</html>
