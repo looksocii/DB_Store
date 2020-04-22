@@ -1,0 +1,43 @@
+.navbar.color{
+    padding: 0;
+    height: 1%;
+}
+
+.w-20{
+    padding-top: 1%;
+    margin: 0;
+    width: 20%;
+}
+.w-20:nth-child(1){
+    background-color: #fef200;
+}
+.w-20:nth-child(2){
+    background-color: #bed73d;
+}
+.w-20:nth-child(3){
+    background-color: #007bff;
+}
+.w-20:nth-child(4){
+    background-color: #d91b5c;
+}
+.w-20:nth-child(5){
+    background-color: #ef519e;
+}
+.btn-3{
+    border-color: #fff;
+    color: #fff;
+    background-color: #d91b5c;
+}
+.btn-3:hover{
+    color: #fff;
+    background-color: #d6678e;
+}
+.btn-4{
+    border-color: #fff;
+    color: #fff;
+    background-color: #ef519e;
+}
+.btn-4:hover{
+    color: #fff;
+    background-color: #e68cb7;
+}
