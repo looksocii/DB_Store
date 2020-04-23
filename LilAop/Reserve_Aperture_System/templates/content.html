@@ -3,77 +3,83 @@
 {% block content %}
 <div class="row mt-5">
     {% for store in stores %}
-    <div class="col-3">
-      <div class="card" >
-        <img src="{{ store.store_pic.url }}" class="card-img-bottom" alt="image">
-          <a href="#" class="btn btn-primary">view</a>
+      <div class="col-3">
+        <div class="card" >
+          <img src="{{ store.store_pic.url }}" class="card-img-bottom" alt="image">
+            <a href="{% url 'store_detail' store.store_id %}" class="btn btn-primary">view</a>
+        </div>
       </div>
-    </div>
     {% endfor %}
     <div class="col-3">
       <div class="card" >
         <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
-          <a href="#" class="btn btn-primary">view</a>
+          <a href="#" class="btn btn-primary btn-outline-light">view</a>
       </div>
     </div>
     <div class="col-3">
       <div class="card" >
         <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
-          <a href="#" class="btn btn-primary">view</a>
+          <a href="#" class="btn btn-primary btn-outline-light">view</a>
       </div>
     </div>
     <div class="col-3">
       <div class="card" >
         <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
-          <a href="#" class="btn btn-primary">view</a>
+          <a href="#" class="btn btn-primary btn-outline-light">view</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-3">
+      <div class="card" >
+        <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
+          <a href="#" class="btn btn-primary btn-outline-light">view</a>
       </div>
     </div>
     <div class="col-3">
       <div class="card" >
         <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
-          <a href="#" class="btn btn-primary">view</a>
+          <a href="#" class="btn btn-primary btn-outline-light">view</a>
       </div>
     </div>
     <div class="col-3">
       <div class="card" >
         <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
-          <a href="#" class="btn btn-primary">view</a>
+          <a href="#" class="btn btn-primary btn-outline-light">view</a>
       </div>
     </div>
     <div class="col-3">
       <div class="card" >
         <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
-          <a href="#" class="btn btn-primary">view</a>
+          <a href="#" class="btn btn-primary btn-outline-light">view</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-3">
+      <div class="card" >
+        <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
+          <a href="#" class="btn btn-primary btn-outline-light">view</a>
       </div>
     </div>
     <div class="col-3">
       <div class="card" >
         <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
-          <a href="#" class="btn btn-primary">view</a>
+          <a href="#" class="btn btn-primary btn-outline-light">view</a>
       </div>
     </div>
     <div class="col-3">
       <div class="card" >
         <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
-          <a href="#" class="btn btn-primary">view</a>
+          <a href="#" class="btn btn-primary btn-outline-light">view</a>
       </div>
     </div>
     <div class="col-3">
       <div class="card" >
         <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
-          <a href="#" class="btn btn-primary">view</a>
-      </div>
-    </div>
-    <div class="col-3">
-      <div class="card" >
-        <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
-          <a href="#" class="btn btn-primary">view</a>
-      </div>
-    </div>
-    <div class="col-3">
-      <div class="card" >
-        <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
-          <a href="#" class="btn btn-primary">view</a>
+          <a href="#" class="btn btn-primary btn-outline-light">view</a>
       </div>
     </div>
   </div>

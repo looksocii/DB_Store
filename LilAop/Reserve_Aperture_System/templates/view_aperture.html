@@ -1,0 +1,86 @@
+{% extends "sidebar.html" %}
+{% load static %}
+{% block content %}
+<div class="row mt-5">
+    {% for aperture in apertures %}
+      <div class="col-3">
+        <div class="card" >
+          <img src="{{ aperture.aper_pic.url }}" class="card-img-bottom" alt="image">
+            <a href="{% url 'aperture_detail' aperture.aper_id %}" class="btn btn-primary">view</a>
+        </div>
+      </div>
+    {% endfor %}
+    <div class="col-3">
+      <div class="card" >
+        <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
+          <a href="#" class="btn btn-primary btn-outline-light">view</a>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card" >
+        <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
+          <a href="#" class="btn btn-primary btn-outline-light">view</a>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card" >
+        <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
+          <a href="#" class="btn btn-primary btn-outline-light">view</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-3">
+      <div class="card" >
+        <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
+          <a href="#" class="btn btn-primary btn-outline-light">view</a>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card" >
+        <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
+          <a href="#" class="btn btn-primary btn-outline-light">view</a>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card" >
+        <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
+          <a href="#" class="btn btn-primary btn-outline-light">view</a>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card" >
+        <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
+          <a href="#" class="btn btn-primary btn-outline-light">view</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-3">
+      <div class="card" >
+        <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
+          <a href="#" class="btn btn-primary btn-outline-light">view</a>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card" >
+        <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
+          <a href="#" class="btn btn-primary btn-outline-light">view</a>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card" >
+        <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
+          <a href="#" class="btn btn-primary btn-outline-light">view</a>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card" >
+        <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
+          <a href="#" class="btn btn-primary btn-outline-light">view</a>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

@@ -37,6 +37,9 @@ class Department(models.Model): # ข้อมูลแผนกงาน
     dep_id = models.IntegerField(primary_key=True, validators=[MaxValueValidator(10)]) #กำหนดให้ใส่ได้แค่ 10 หลัก
     dep_name = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.dep_name
+
 class Employee(models.Model): # ข้อมูลพนักงานห้าง
     """ 
         - ข้อมูล Employee จะถูกสร้างโดย admin
@@ -60,6 +63,9 @@ class Employee(models.Model): # ข้อมูลพนักงานห้า
     account_acc_id = models.OneToOneField(User, on_delete=models.CASCADE)
     department_dep_id = models.ForeignKey(Department, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.account_acc_id.first_name
+
 class Company(models.Model): # ข้อมูลบริษัท
     """
         เมื่อ user สมัครสมาชิกเสร็จแล้วจะยังไม่ทำการสร้างข้อมูล Company แต่จะมี Account แล้ว
@@ -78,6 +84,9 @@ class Company(models.Model): # ข้อมูลบริษัท
     # --------------------------------------- มีความสัมพันธ์กับตารางอื่น ---------------------------------------
     account_acc_id = models.OneToOneField(User, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.company_name
+
 class Accountant(models.Model): # ข้อมูลพนักงานฝ่ายบัญชี
     """
         ข้อมูลพนักงานฝ่ายบัญชีจะถูกสร้างขึ้นโดย admin
@@ -88,6 +97,9 @@ class Accountant(models.Model): # ข้อมูลพนักงานฝ่�
     emp_type = models.CharField(max_length=255, choices=EMPLOYEE_TYPE, default=ACCOUMTANT) #ตั้งค่า default ให้เป็นพนักงานฝ่ายบัญชี
     # --------------------------------------- มีความสัมพันธ์กับตารางอื่น ---------------------------------------
     employee_emp_id = models.OneToOneField(Employee, on_delete=models.CASCADE, primary_key=True)
+
+    def __str__(self):
+        return self.employee_emp_id.account_acc_id.first_name
 
 class Sale(models.Model): # ข้อมูลพนักงานฝ่ายขาย
     """
@@ -100,6 +112,9 @@ class Sale(models.Model): # ข้อมูลพนักงานฝ่าย�
     # --------------------------------------- มีความสัมพันธ์กับตารางอื่น ---------------------------------------
     employee_emp_id = models.OneToOneField(Employee, on_delete=models.CASCADE, primary_key=True)
 
+    def __str__(self):
+        return self.employee_emp_id.account_acc_id.first_name
+
 class Manager(models.Model): # ข้อมูลผู้จัดการร้านค้า
     """
         ข้อมูลผู้จัดการถูกสร้างโดย user
@@ -111,6 +126,9 @@ class Manager(models.Model): # ข้อมูลผู้จัดการร�
     manag_lname = models.CharField(max_length=255)
     manag_level = models.IntegerField(validators=[MaxValueValidator(10)]) #กำหนดให้ใส่ได้แค่ 10 หลัก
     manag_phone = models.CharField(max_length=10, unique=True)
+
+    def __str__(self):
+        return self.manag_fname
 
 class Store(models.Model): # ข้อมูลร้านค้า
     """
@@ -129,6 +147,9 @@ class Store(models.Model): # ข้อมูลร้านค้า
     manage_manag_id = models.ForeignKey(Manager, on_delete=models.CASCADE)
     company_company_id = models.ForeignKey(Company, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.store_name
+
 class Cost(models.Model): # ข้อมูลค่าใช้จ่าย
     """
         ข้อมูลการเงินจะถูกสร้างขึ้นโดยพนักงานฝ่ายบัญชี
@@ -146,6 +167,9 @@ class Cost(models.Model): # ข้อมูลค่าใช้จ่าย
     accountant_employee_emp_id = models.ForeignKey(Accountant, on_delete=models.CASCADE)
     store_store_id = models.ForeignKey(Store, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.cost_id
+
 class Aperture(models.Model): # ข้อมูลพื้นที่ห้องว่าง
     """
         พื้นที่ว่างถูกเพิ่มโดยพนักงานฝ่ายขายซึ่งพนักงานฝ่ายขายถูกสร้างโดย admin
@@ -160,4 +184,7 @@ class Aperture(models.Model): # ข้อมูลพื้นที่ห้อ
     issue_date = models.DateField(auto_now=True) #เพิ่มข้อมูลเองโดยเวลาที่สร้างเป็นเวลาปัจจุบัน
     # --------------------------------------- มีความสัมพันธ์กับตารางอื่น ---------------------------------------
     sale_employee_emp_id = models.ForeignKey(Sale, on_delete=models.CASCADE)
-    store_store_id = models.ForeignKey(Store, on_delete=models.CASCADE)
+    store_store_id = models.ForeignKey(Store, on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self):
+        return self.aper_loc

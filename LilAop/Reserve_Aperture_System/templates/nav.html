@@ -19,13 +19,17 @@
         <div class="w-20"></div>
     </nav>
     <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static '/photo/logo.png' %}" width="50px"></a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'index' %}"><img src="{% static 'logo.png' %}" width="50px"></a>
+        {% else %}
+            <a class="navbar-brand" href="{% url 'index' %}">Home</a>
+        {% endif %}
         <form class="form-inline my-2 my-lg-0">
             {% if user.is_authenticated %}
-                <a href="{% url 'logout' %}"><button type="button" class="btn mr-3">Logout</button></a>
+                <a href="{% url 'logout' %}"><button class="btn btn-2 mr-3 btn-outline-light" type="button">Log out</button></a>
             {% else %}
-                <button class="btn mr-3">Sign Up</button>
-                <a href="{% url 'login' %}"><button type="button" class="btn mr-3">Log In</button></a>
+                <a href="{% url 'register' %}"><button class="btn btn-1 mr-3 btn-outline-light" type="button">Sign Up</button></a>
+                <a href="{% url 'login' %}"><button class="btn btn-2 mr-3 btn-outline-light" type="button">Log In</button></a>
             {% endif %}
         </form>
     </nav>

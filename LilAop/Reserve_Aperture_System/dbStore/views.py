@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import *
 from .forms import *
 
@@ -20,6 +21,12 @@ def index(request):
     store_all = Store.objects.all()
     return render(request, 'content.html', {
         'stores': store_all
+    })
+
+def aperture(request):
+    aperture_all = Aperture.objects.all()
+    return render(request, 'view_aperture.html', {
+        'apertures': aperture_all
     })
 
 def my_login(request):
@@ -60,3 +67,50 @@ def my_login(request):
 def my_logout(request):
     logout(request)
     return redirect('login')
+
+def my_register(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password_1 = request.POST.get('password1')
+        password_2 = request.POST.get('password2')
+        try:
+            user = User.objects.get(username=username)
+        except ObjectDoesNotExist:
+            user = None
+
+        if user or (password_1 != password_2):
+            error = list()
+            if user:
+                error.append("กรุณาตั้ง username ใหม่")
+            if password_1 != password_2:
+                error.append("กรุณากรอกรหัสผ่านให้ตรงกัน")
+            context = {
+                'username': username,
+                'password1': password_1,
+                'password2': password_2,
+                'errors': error
+            }
+            return render(request, 'register.html', context)
+        else:
+            user = User.objects.create_user(
+                username=request.POST.get('username'),
+                password=request.POST.get('password1')
+            )
+            # group = Group.objects.get(name='audience') # นำเข้ากลุ่ม
+            # user.groups.add(group)
+            user.save()
+        return redirect('login')
+
+    return render(request, 'register.html')
+
+def store_detail(request, store_id):
+    store = Store.objects.get(pk=store_id)
+    return render(request, 'store.html', {
+        'store': store
+    })
+
+def aperture_detail(request, aperture_id):
+    aperture = Aperture.objects.get(pk=aperture_id)
+    return render(request, 'aperture.html', {
+        'aperture': aperture
+    })
