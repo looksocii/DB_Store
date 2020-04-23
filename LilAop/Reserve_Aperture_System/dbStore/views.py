@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.models import Group, User
 from django.shortcuts import *
 from .forms import *
 
@@ -24,7 +25,7 @@ def index(request):
     })
 
 def aperture(request):
-    aperture_all = Aperture.objects.all()
+    aperture_all = Aperture.objects.filter(aper_status=False)
     return render(request, 'view_aperture.html', {
         'apertures': aperture_all
     })
@@ -113,4 +114,25 @@ def aperture_detail(request, aperture_id):
     aperture = Aperture.objects.get(pk=aperture_id)
     return render(request, 'aperture.html', {
         'aperture': aperture
+    })
+
+def add_company(request, aperture_id):
+    aperture = Aperture.objects.get(pk=aperture_id)
+    if request.method == 'POST':
+        company = Company(
+            company_name=request.POST.get('company_name'),
+            company_address=request.POST.get('company_address'),
+            company_phone=request.POST.get('company_phone'),
+            contract_fname=request.POST.get('contract_fname'),
+            contract_lname=request.POST.get('contract_lname'),
+            other_notes=request.POST.get('other_notes'),
+            account_acc_id_id=request.user.id
+        )
+        company.save()
+        aperture.aper_status = True
+        aperture.save()
+        return redirect('index')
+
+    return render(request, 'company.html', {
+        'aperture_id': aperture_id
     })

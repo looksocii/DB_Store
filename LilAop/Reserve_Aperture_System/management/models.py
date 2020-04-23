@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MaxValueValidator
 from django.contrib.auth.models import User
+from datetime import datetime, timedelta
 
 """
     ตาราง ACCOUNT ให้เป็นตาราง User จาก auth ของ django
@@ -72,13 +73,13 @@ class Company(models.Model): # ข้อมูลบริษัท
         และจะมีปุ่มเพิ่มบริษัทหรือเริ่มเช่าพิ้นที่จะมี form ให้กรอกซึ่งเป้นข้อมูล Company
         (สร้าง form)
     """
-    company_id = models.IntegerField(primary_key=True, validators=[MaxValueValidator(10)]) #กำหนดให้ใส่ได้แค่ 10 หลัก
+    company_id = models.AutoField(primary_key=True, validators=[MaxValueValidator(10)]) #กำหนดให้ใส่ได้แค่ 10 หลัก
     company_name = models.CharField(max_length=255)
     company_address = models.TextField()
     company_phone = models.CharField(max_length=9, unique=True)
     contract_fname = models.CharField(max_length=255)
     contract_lname = models.CharField(max_length=255)
-    expires_date = models.DateField() #ต้องกำหนดว่า เวลาปัจจุบัน + 1 ปี
+    expires_date = models.DateTimeField(default=datetime.now()+timedelta(days=365)) #ต้องกำหนดว่า เวลาปัจจุบัน + 1 ปี
     other_notes = models.TextField()
     acc_type = models.CharField(max_length=255, choices=ACCOUNT_TYPE, default=COMPANY) #ตั้งค่า default ให้เป็นบริษัทที่จะมาเช่าพื้นที่
     # --------------------------------------- มีความสัมพันธ์กับตารางอื่น ---------------------------------------

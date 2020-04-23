@@ -9,6 +9,7 @@ urlpatterns = [
     path('aperture/', views.aperture, name='view_aperture'),
     path('store_detail/<int:store_id>/', views.store_detail, name='store_detail'),
     path('aperture_detail/<int:aperture_id>/', views.aperture_detail, name='aperture_detail'),
+    path('add_company/<int:aperture_id>/', views.add_company, name='add_company'),
 ]
 
 if settings.DEBUG:
