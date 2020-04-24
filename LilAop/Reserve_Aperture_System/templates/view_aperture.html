@@ -6,10 +6,21 @@
       <div class="col-3">
         <div class="card" >
           <img src="{{ aperture.aper_pic.url }}" class="card-img-bottom" alt="image">
-            <a href="{% url 'aperture_detail' aperture.aper_id %}" class="btn btn-primary">view</a>
+            {% if aperture.store_store_id == null and perms.management.change_store%}
+              <a href="{% url 'add_store' %}" class="btn btn-primary">Add Store</a>
+            {% else %}
+              {% if perms.management.change_store %}
+                <a href="{% url 'sale_view' aperture.aper_id %}" class="btn btn-primary">view</a>
+              {% else %}
+                <a href="{% url 'aperture_detail' aperture.aper_id %}" class="btn btn-primary">view</a>
+              {% endif %}
+            {% endif %}
         </div>
       </div>
     {% endfor %}
+
+
+
     <div class="col-3">
       <div class="card" >
         <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">

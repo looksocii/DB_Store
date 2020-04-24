@@ -8,24 +8,16 @@ from .forms import *
 
 # Create your views here.
 def index(request):
-    # if request.method == 'POST':
-    #     form = StoreForm(request.POST, request.FILES)
-    #     if form.is_valid():
-    #         form.save()
-    #         return redirect('index')
-    # else:
-    #     form = StoreForm()
-    # return render(request, 'uplond_img.html', {
-    #     'form': form
-    # })
-
     store_all = Store.objects.all()
     return render(request, 'content.html', {
         'stores': store_all
     })
 
 def aperture(request):
-    aperture_all = Aperture.objects.filter(aper_status=False)
+    if request.user.has_perm('management.change_aperture'):
+        aperture_all = Aperture.objects.all()
+    else:
+        aperture_all = Aperture.objects.filter(aper_status=False)
     return render(request, 'view_aperture.html', {
         'apertures': aperture_all
     })
@@ -97,8 +89,8 @@ def my_register(request):
                 username=request.POST.get('username'),
                 password=request.POST.get('password1')
             )
-            # group = Group.objects.get(name='audience') # นำเข้ากลุ่ม
-            # user.groups.add(group)
+            group = Group.objects.get(name='customer')
+            user.groups.add(group)
             user.save()
         return redirect('login')
 
@@ -129,10 +121,85 @@ def add_company(request, aperture_id):
             account_acc_id_id=request.user.id
         )
         company.save()
-        aperture.aper_status = True
-        aperture.save()
         return redirect('index')
 
     return render(request, 'company.html', {
         'aperture_id': aperture_id
+    })
+
+def edit_store(request, store_id):
+    store = Store.objects.get(pk=store_id)
+    if request.method == 'POST':
+        store.store_name = request.POST.get('store_name')
+        store.phone = request.POST.get('phone')
+        store.store_id = request.POST.get('store_id')
+        store.branch = request.POST.get('branch')
+        store.cost_total = request.POST.get('cost_total')
+        store.manage_manag_id.manag_fname = request.POST.get('manag_fname')
+        store.company_company_id.company_name = request.POST.get('company_name')
+        store.repaired = request.POST.get('repaired')
+        store.other_notes = request.POST.get('other_notes')
+        store.save()
+        return render(request, 'store_details.html', {
+            'store': store
+        })
+
+    return render(request, 'edit_store.html', {
+        'store': store
+    })
+
+def store_detail_edit(request, store_id):
+    store = Store.objects.get(pk=store_id)
+    return render(request, 'store_details.html', {
+        'store': store
+    })
+
+def sale_view(request, aper_id):
+    aper = Aperture.objects.get(pk=aper_id)
+    return render(request, 'sale_view.html', {
+        'aper': aper
+    })
+
+def add_store(request):
+    # if request.method == 'POST' and request.FILES['store_pic']:
+
+    #     store_pic = request.FILES['store_pic']
+    #     fs = FileSystemStorage()
+    #     filename = fs.save(store_pic.name, store_pic)
+    #     uploaded_file_url = fs.url(filename)
+
+    #     store = Store(
+    #         store_name=request.POST.get('store_name'),
+    #         store_pic=uploaded_file_url,
+    #         branch=request.POST.get('branch'),
+    #         phone=request.POST.get('phone'),
+    #         cost_total=request.POST.get('cost_total'),
+    #         repaired=request.POST.get('repaired'),
+    #         other_notes=request.POST.get('other_notes'),
+    #         manage_manag_id_id=1,
+    #         company_company_id_id=2
+    #     )
+    #     store.save()
+    #     return redirect('index')
+
+    # return render(request, 'add_store.html')
+    if request.method == 'POST':
+        form = StoreForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = StoreForm()
+    return render(request, 'add_store.html', {
+        'form': form
+    })
+
+def remove_store(request, store_id):
+    if request.method == 'POST':
+        store = Store.objects.get(pk=store_id)
+        store.delete()
+        return redirect('index')
+        
+    return render(request, 'question.html', {
+        'store_id': store_id
     })

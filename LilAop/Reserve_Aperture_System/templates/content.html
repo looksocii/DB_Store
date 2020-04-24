@@ -6,7 +6,11 @@
       <div class="col-3">
         <div class="card" >
           <img src="{{ store.store_pic.url }}" class="card-img-bottom" alt="image">
-            <a href="{% url 'store_detail' store.store_id %}" class="btn btn-primary">view</a>
+            {% if perms.management.change_store %}
+              <a href="{% url 'store_detail_edit' store.store_id %}" class="btn btn-primary">view</a>
+            {% else %}
+              <a href="{% url 'store_detail' store.store_id %}" class="btn btn-primary">view</a>
+            {% endif %}
         </div>
       </div>
     {% endfor %}

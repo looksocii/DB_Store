@@ -3,6 +3,10 @@ from django.core.validators import MaxValueValidator
 from django.contrib.auth.models import User
 from datetime import datetime, timedelta
 
+# ----------------------- ตั้งค่าที่ตั้งที่ใช้เก็บไฟล์รูปที่อัพโหลดลงบนหน้าเว็บ ---------------------- #
+location = 'media'
+# ------------------------------------------------------------------------------------ #
+
 """
     ตาราง ACCOUNT ให้เป็นตาราง User จาก auth ของ django
     แบ่งกลุ่ม permission เป็น 2 กลุ่ม คือ บัญชีของพนักงานห้างและบัญชีของบริษัท
@@ -35,7 +39,7 @@ class Department(models.Model): # ข้อมูลแผนกงาน
         เพิ่มข้อมูลแผนกงานโดย admin
         (ไม่สร้าง form)
     """
-    dep_id = models.IntegerField(primary_key=True, validators=[MaxValueValidator(10)]) #กำหนดให้ใส่ได้แค่ 10 หลัก
+    dep_id = models.AutoField(primary_key=True, validators=[MaxValueValidator(10)]) #กำหนดให้ใส่ได้แค่ 10 หลัก
     dep_name = models.CharField(max_length=255)
 
     def __str__(self):
@@ -49,9 +53,9 @@ class Employee(models.Model): # ข้อมูลพนักงานห้า
         ซึ่งจะถูกนำเข้ากลุ่มโดย admin กำหนด permission โดย admin
         (ไม่สร้าง form)
     """
-    emp_id = models.IntegerField(primary_key=True, validators=[MaxValueValidator(10)]) #กำหนดให้ใส่ได้แค่ 10 หลัก และ ยังไม่ได้ใส่ key AI
+    emp_id = models.AutoField(primary_key=True, validators=[MaxValueValidator(10)]) #กำหนดให้ใส่ได้แค่ 10 หลัก และ ยังไม่ได้ใส่ key AI
     entrance_date = models.DateField()
-    leave_date = models.DateField(null=True)
+    leave_date = models.DateField(blank=True, null=True)
     days_left = models.IntegerField(
         validators=[MaxValueValidator(10)], 
         auto_created=5
@@ -122,7 +126,7 @@ class Manager(models.Model): # ข้อมูลผู้จัดการร�
         ซึ่งจะถูกสร้างหลังจากที่กรอก form สร้างบริษัทแล้ว (ต้องกำหนดว่าใครเป้นคนจัดการบริษัทนี้)
         (สร้าง form)
     """
-    manag_id = models.IntegerField(primary_key=True, validators=[MaxValueValidator(10)]) #กำหนดให้ใส่ได้แค่ 10 หลัก
+    manag_id = models.AutoField(primary_key=True, validators=[MaxValueValidator(10)]) #กำหนดให้ใส่ได้แค่ 10 หลัก
     manag_fname = models.CharField(max_length=255)
     manag_lname = models.CharField(max_length=255)
     manag_level = models.IntegerField(validators=[MaxValueValidator(10)]) #กำหนดให้ใส่ได้แค่ 10 หลัก
@@ -136,9 +140,9 @@ class Store(models.Model): # ข้อมูลร้านค้า
         ข้อมูลร้านค้าถูกสร้างโดย user หลังจากที่กรอกข้อมูลบริษัทแล้ว (user กดปุ่มเพิ่มร้านค้า)
         (สร้าง form)
     """
-    store_id = models.IntegerField(primary_key=True, validators=[MaxValueValidator(10)]) #กำหนดให้ใส่ได้แค่ 10 หลัก
+    store_id = models.AutoField(primary_key=True, validators=[MaxValueValidator(10)]) #กำหนดให้ใส่ได้แค่ 10 หลัก
     store_name = models.CharField(max_length=255)
-    store_pic = models.ImageField(upload_to='C:/Users/LilAop/Desktop/django_projects/Reserve_Aperture_System/media', default=None)
+    store_pic = models.ImageField(upload_to=location, default=None)
     branch = models.CharField(max_length=255)
     phone = models.CharField(max_length=10)
     cost_total = models.FloatField()
@@ -156,7 +160,7 @@ class Cost(models.Model): # ข้อมูลค่าใช้จ่าย
         ข้อมูลการเงินจะถูกสร้างขึ้นโดยพนักงานฝ่ายบัญชี
         (สร้าง form)
     """
-    cost_id = models.IntegerField(primary_key=True, validators=[MaxValueValidator(10)]) #กำหนดให้ใส่ได้แค่ 10 หลัก
+    cost_id = models.AutoField(primary_key=True, validators=[MaxValueValidator(10)]) #กำหนดให้ใส่ได้แค่ 10 หลัก
     electric_bill = models.FloatField()
     water_bill = models.FloatField()
     rent_fee = models.FloatField()
@@ -176,10 +180,10 @@ class Aperture(models.Model): # ข้อมูลพื้นที่ห้อ
         พื้นที่ว่างถูกเพิ่มโดยพนักงานฝ่ายขายซึ่งพนักงานฝ่ายขายถูกสร้างโดย admin
         (สร้าง form)
     """
-    aper_id = models.IntegerField(primary_key=True, validators=[MaxValueValidator(10)]) #กำหนดให้ใส่ได้แค่ 10 หลัก
+    aper_id = models.AutoField(primary_key=True, validators=[MaxValueValidator(10)]) #กำหนดให้ใส่ได้แค่ 10 หลัก
     aper_area = models.FloatField()
     aper_loc = models.CharField(max_length=255)
-    aper_pic = models.ImageField(upload_to='C:/Users/LilAop/Desktop/django_projects/Reserve_Aperture_System/media', default=None)
+    aper_pic = models.ImageField(upload_to=location, default=None)
     aper_price = models.FloatField()
     aper_status = models.BooleanField(null=False)
     issue_date = models.DateField(auto_now=True) #เพิ่มข้อมูลเองโดยเวลาที่สร้างเป็นเวลาปัจจุบัน

@@ -9,8 +9,12 @@
             <h4>You want to remove this store?</h4>
         </center>
         <br>
-        <button type="button" class="btn btn-warning btn-lg btn-block">Yes</button><br>
-        <button type="button" class="btn btn-warning btn-lg btn-block">No</button>
+        <form action="{% url 'remove_store' store_id %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-warning btn-lg btn-block">Yes</button>
+        </form>
+        <br>
+        <a href="{% url 'index' %}" class="btn btn-warning btn-lg btn-block">No</a>
         <br>
     </div>
   </div>
