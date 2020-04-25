@@ -16,7 +16,8 @@ def index(request):
 
     return render(request, 'content.html', {
         'stores': store_all,
-        'cost': cost
+        'cost': cost,
+        'st':'st'
     })
 
 def aperture(request):
@@ -24,7 +25,7 @@ def aperture(request):
         aperture_all = Aperture.objects.all()
     else:
         aperture_all = Aperture.objects.filter(aper_status=False)
-    return render(request, 'view_aperture.html', {
+    return render(request, 'content.html', {
         'apertures': aperture_all
     })
 
