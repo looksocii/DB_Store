@@ -1,30 +1,24 @@
 {% extends 'nav.html' %}
 {% block sidebar %}
-{% comment %} <div class="row-2 m-3">
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+            $('#blah').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+<div class="row-2 m-3">
     <div class="col-12">
-    <form action="{% url 'add_store' %}" method="POST">
+    <form action="{% url 'add_store' aper_id %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="row">
             <div class="col-4 p-5 ml-5 bg-dark text-white">
                 <div class="bg-white text-white">
-                    <Br>
-                    <br>
-                    <br>
-                    <br>
-                    <Br>
-                    <Br>
-                    <br>
-                    <br>
-                    <br>
-                    <Br>
-                    <Br>
-                    <br>
-                    <br>
-                    <br>
-                    <Br>
-                    <br>
-                    <br>
-                    เลือกรูปภาพร้านค้า<input type="file" name="store_pic">
+                    <img id="blah" width="400px">
                 </div>
                 <br>
                 <center>
@@ -48,27 +42,39 @@
                     <tbody>
                         <tr align="center">
                             <td>ชื่อร้านค้า</td>
-                            <td><input type="text" class="form-control" name="store_name"></td>
+                            <td>{{ form.store_name }}</td>
                         </tr>
                         <tr align="center">
                             <td>เบอร์โทรร้านค้า</td>
-                            <td><input type="text" class="form-control" name="phone"></td>
+                            <td>{{ form.phone }}</td>
                         </tr>
                         <tr align="center">
                             <td>ชื่อสาขาร้าน</td>
-                            <td><input type="text" class="form-control" name="branch"></td>
+                            <td>{{ form.branch }}</td>
+                        </tr>
+                        <tr align="center">
+                            <td>รหัสผู้จัดการร้าน</td>
+                            <td>{{ form.manage_manag_id }}</td>
+                        </tr>
+                        <tr align="center">
+                            <td>รหัสบริษัทร้านค้า</td>
+                            <td>{{ form.company_company_id }}</td>
                         </tr>
                         <tr align="center">
                             <td>ค่าใช้จ่ายทั้งหมด</td>
-                            <td><input type="text" class="form-control" name="cost_total"></td>
+                            <td>{{ form.cost_total }}</td>
                         </tr>
                         <tr align="center">
                             <td>รายการที่ซ่อมแซม</td>
-                            <td><input type="text" class="form-control" name="repaired"></td>
+                            <td>{{ form.repaired }}</td>
                         </tr>
                         <tr align="center">
                             <td>หมายเหตุ</td>
-                            <td><textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="other_notes"></textarea></td>
+                            <td>{{ form.other_notes }}</td>
+                        </tr>
+                        <tr align="center">
+                            <td>เลือกรูปภาพร้านค้า</td>
+                            <td>{{ form.store_pic }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -78,10 +84,5 @@
         </div>
         </form>
     </div>
-</div> {% endcomment %}
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Upload</button>
-</form>
+</div>
 {% endblock sidebar %}

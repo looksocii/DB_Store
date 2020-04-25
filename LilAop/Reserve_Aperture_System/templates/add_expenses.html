@@ -8,10 +8,10 @@
                     <div class="side-bar col-3 ">
                         <div class="card mt-3 w-100 ml-3 bg-dark">
                             <div class="card-body">
-                                <h5 class="navbar-brand text-light" href="#">Name Store</h5>
-                                <a href="Edit.html"> <button class="btn btn-4 btn-block btn-warning" type="submit" id="button-addon2">Edit warmlete and bills</button></a>
+                                <h5 class="navbar-brand text-light">{{ store.store_name }}<br>ที่ตั้ง : {{ aper.aper_loc }}<br>ราคาที่ : {{ aper.aper_price }} บาท/เดือน</h5>
+                                <a href="Edit.html"> <button class="btn btn-4 btn-block btn-warning" type="submit" id="button-addon2">Edit expenses and bills</button></a>
                             </div>
-                        <img src="{% static 'image01.png' %}" class="card-img-bottom h-500px" alt="image.png">
+                        <img src="{{ store.store_pic.url }}" class="card-img-bottom h-500px">
                         </div>
                     </div>
 
@@ -22,31 +22,31 @@
                                 <tbody>
                                   <tr>
                                     <th scope="row">ค่าไฟ</th>
-                                    <td>xxxxxxx</td>
+                                    <td>{{ cost.electric_bill }}</td>
                                   </tr>
                                   <tr>
                                     <th scope="row">ค่าน้ำ</th>
-                                    <td>xxxxxxx</td>
+                                    <td>{{ cost.water_bill }}</td>
                                   </tr>
                                   <tr>
                                     <th scope="row">ค่าเช่าพื้นที่</th>
-                                    <td>xxxxxxx</td>
+                                    <td>{{ cost.rent_fee }}</td>
                                   </tr>
                                   <tr>
                                     <th scope="row">ค่าซ่อมเเซม</th>
-                                    <td>xxxxxxx</td>
+                                    <td>{{ cost.repair_fee }}</td>
                                   </tr>
                                   <tr>
                                     <th scope="row">ค่าประกัน</th>
-                                    <td>xxxxxxx</td>
+                                    <td>{{ cost.insurance_fee }}</td>
                                   </tr>
                                   <tr>
                                     <th scope="row">ค่าใช้จ่ายอื่นๆ</th>
-                                    <td>xxxxxxx</td>
+                                    <td>{{ cost.other_fee }}</td>
                                   </tr>
                                   <tr>
                                     <th scope="row">วันที่สร้างบิล</th>
-                                    <td>xxxxxxx</td>
+                                    <td>{{ cost.date }}</td>
                                   </tr>
                                 </tbody>
                               </table >

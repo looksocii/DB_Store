@@ -3,14 +3,20 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import Group, User
+from django.db.models import Count
 from django.shortcuts import *
 from .forms import *
 
 # Create your views here.
 def index(request):
     store_all = Store.objects.all()
+
+    cost = Store.objects.annotate(Count('cost'))
+    cost = cost.values_list('store_id', 'cost__count')
+
     return render(request, 'content.html', {
-        'stores': store_all
+        'stores': store_all,
+        'cost': cost
     })
 
 def aperture(request):
@@ -92,7 +98,17 @@ def my_register(request):
             group = Group.objects.get(name='customer')
             user.groups.add(group)
             user.save()
-        return redirect('login')
+            company = Company(
+                company_name=request.POST.get('company_name'),
+                company_address=request.POST.get('company_address'),
+                company_phone=request.POST.get('company_phone'),
+                contract_fname=request.POST.get('contract_fname'),
+                contract_lname=request.POST.get('contract_lname'),
+                other_notes=request.POST.get('other_notes'),
+                account_acc_id_id=user.id,
+            )
+            company.save()
+            return redirect('login')
 
     return render(request, 'register.html')
 
@@ -108,22 +124,21 @@ def aperture_detail(request, aperture_id):
         'aperture': aperture
     })
 
-def add_company(request, aperture_id):
+def add_manager(request, aperture_id):
     aperture = Aperture.objects.get(pk=aperture_id)
     if request.method == 'POST':
-        company = Company(
-            company_name=request.POST.get('company_name'),
-            company_address=request.POST.get('company_address'),
-            company_phone=request.POST.get('company_phone'),
-            contract_fname=request.POST.get('contract_fname'),
-            contract_lname=request.POST.get('contract_lname'),
-            other_notes=request.POST.get('other_notes'),
-            account_acc_id_id=request.user.id
+        manager = Manager(
+            manag_fname=request.POST.get('manag_fname'),
+            manag_lname=request.POST.get('manag_lname'),
+            manag_level=request.POST.get('manag_level'),
+            manag_phone=request.POST.get('manag_phone')
         )
-        company.save()
+        manager.save()
+        aperture.aper_status = True
+        aperture.save()
         return redirect('index')
 
-    return render(request, 'company.html', {
+    return render(request, 'manager.html', {
         'aperture_id': aperture_id
     })
 
@@ -160,38 +175,20 @@ def sale_view(request, aper_id):
         'aper': aper
     })
 
-def add_store(request):
-    # if request.method == 'POST' and request.FILES['store_pic']:
-
-    #     store_pic = request.FILES['store_pic']
-    #     fs = FileSystemStorage()
-    #     filename = fs.save(store_pic.name, store_pic)
-    #     uploaded_file_url = fs.url(filename)
-
-    #     store = Store(
-    #         store_name=request.POST.get('store_name'),
-    #         store_pic=uploaded_file_url,
-    #         branch=request.POST.get('branch'),
-    #         phone=request.POST.get('phone'),
-    #         cost_total=request.POST.get('cost_total'),
-    #         repaired=request.POST.get('repaired'),
-    #         other_notes=request.POST.get('other_notes'),
-    #         manage_manag_id_id=1,
-    #         company_company_id_id=2
-    #     )
-    #     store.save()
-    #     return redirect('index')
-
-    # return render(request, 'add_store.html')
+def add_store(request, aper_id):
+    aper = Aperture.objects.get(pk=aper_id)
     if request.method == 'POST':
         form = StoreForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            aper.store_store_id_id = Store.objects.latest('store_id').store_id
+            aper.save()
             return redirect('index')
     else:
         form = StoreForm()
     return render(request, 'add_store.html', {
-        'form': form
+        'form': form,
+        'aper_id': aper_id
     })
 
 def remove_store(request, store_id):
@@ -202,4 +199,30 @@ def remove_store(request, store_id):
         
     return render(request, 'question.html', {
         'store_id': store_id
+    })
+
+def edit_expenses(request, store_id):
+    store = Store.objects.get(pk=store_id)
+    aper = Aperture.objects.get(store_store_id=store_id)
+    if request.method == 'POST':
+        form = CostForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = CostForm()
+    return render(request, 'edit_expenses.html', {
+        'form': form,
+        'store': store,
+        'aper': aper
+    })
+
+def expenses_details(request, store_id):
+    store = Store.objects.get(pk=store_id)
+    aper = Aperture.objects.get(store_store_id=store_id)
+    cost = Cost.objects.get(store_store_id=store_id)
+    return render(request, 'add_expenses.html', {
+        'store': store,
+        'aper': aper,
+        'cost': cost
     })

@@ -6,8 +6,8 @@
       <div class="col-3">
         <div class="card" >
           <img src="{{ aperture.aper_pic.url }}" class="card-img-bottom" alt="image">
-            {% if aperture.store_store_id == null and perms.management.change_store%}
-              <a href="{% url 'add_store' %}" class="btn btn-primary">Add Store</a>
+            {% if aperture.aper_status == True and aperture.store_store_id == null %}
+              <a href="{% url 'add_store' aperture.aper_id %}" class="btn btn-primary">Add Store</a>
             {% else %}
               {% if perms.management.change_store %}
                 <a href="{% url 'sale_view' aperture.aper_id %}" class="btn btn-primary">view</a>
@@ -18,80 +18,5 @@
         </div>
       </div>
     {% endfor %}
-
-
-
-    <div class="col-3">
-      <div class="card" >
-        <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
-          <a href="#" class="btn btn-primary btn-outline-light">view</a>
-      </div>
-    </div>
-    <div class="col-3">
-      <div class="card" >
-        <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
-          <a href="#" class="btn btn-primary btn-outline-light">view</a>
-      </div>
-    </div>
-    <div class="col-3">
-      <div class="card" >
-        <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
-          <a href="#" class="btn btn-primary btn-outline-light">view</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="row mt-5">
-    <div class="col-3">
-      <div class="card" >
-        <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
-          <a href="#" class="btn btn-primary btn-outline-light">view</a>
-      </div>
-    </div>
-    <div class="col-3">
-      <div class="card" >
-        <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
-          <a href="#" class="btn btn-primary btn-outline-light">view</a>
-      </div>
-    </div>
-    <div class="col-3">
-      <div class="card" >
-        <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
-          <a href="#" class="btn btn-primary btn-outline-light">view</a>
-      </div>
-    </div>
-    <div class="col-3">
-      <div class="card" >
-        <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
-          <a href="#" class="btn btn-primary btn-outline-light">view</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="row mt-5">
-    <div class="col-3">
-      <div class="card" >
-        <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
-          <a href="#" class="btn btn-primary btn-outline-light">view</a>
-      </div>
-    </div>
-    <div class="col-3">
-      <div class="card" >
-        <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
-          <a href="#" class="btn btn-primary btn-outline-light">view</a>
-      </div>
-    </div>
-    <div class="col-3">
-      <div class="card" >
-        <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
-          <a href="#" class="btn btn-primary btn-outline-light">view</a>
-      </div>
-    </div>
-    <div class="col-3">
-      <div class="card" >
-        <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
-          <a href="#" class="btn btn-primary btn-outline-light">view</a>
-      </div>
-    </div>
-  </div>
+</div>
 {% endblock content %}

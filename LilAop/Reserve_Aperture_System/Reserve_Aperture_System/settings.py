@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'Reserve_Aperture_System.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'db_store',
+        'NAME': 'Store',
         'USER': 'postgres',
         'PASSWORD': '528491',
         'HOST': 'localhost',

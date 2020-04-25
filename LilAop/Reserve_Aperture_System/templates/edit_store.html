@@ -33,7 +33,7 @@
                         </tr>
                         <tr align="center">
                             <td>ค่าใช้จ่ายทั้งหมด</td>
-                            <td><input type="text" class="form-control" value="{{ store.cost_total }}" name="cost_total"></td>
+                            <td><input type="text" class="form-control" value="{% if store.cost_total == None %}{{ store.cost_total }}{% else %}0{% endif %}" name="cost_total"></td>
                         </tr>
                         <tr align="center">
                             <td>รหัสผู้จัดการร้าน</td>

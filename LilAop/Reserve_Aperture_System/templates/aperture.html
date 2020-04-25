@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-5 mt-3 p-5">
             <h3 class="m-5">You want to book this aperture</h3>
-            <a href="{% url 'add_company' aperture.aper_id %}"><button type="button" class="btn btn-5 btn-light text-dark mt-3 mx-10">Booking</button></a>
+            <a href="{% url 'add_manager' aperture.aper_id %}"><button type="button" class="btn btn-5 btn-light text-dark mt-3 mx-10">Booking</button></a>
         </div>
         <div class="col-7">
             <div class="row form">
@@ -30,7 +30,7 @@
                         <p class="text-muted">{{ aperture.aper_id }}</p>
                     </div>
                     <div class="row mb-3">
-                        <p class="text-muted">{{ aperture.aper_area }}</p>
+                        <p class="text-muted">{{ aperture.aper_area }} ตารางเมตร</p>
                     </div>
                     <div class="row mb-3">
                         <p class="text-muted">{{ aperture.aper_loc }}</p>
@@ -49,7 +49,7 @@
                         <p class="text-muted">{{ aperture.issue_date }}</p>
                     </div>
                     <div class="row mb-3">
-                        <p class="text-muted">{{ aperture.aper_price }}</p>
+                        <p class="text-muted">{{ aperture.aper_price }} บาท/เดือน</p>
                     </div>
                 </div>
             </div>

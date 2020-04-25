@@ -6,7 +6,7 @@
     <div class="side-bar col-3">
       <div class="card mt-3 w-100">
         <div class="card-body">
-          {% if stores %}
+          {% if stores.count >= 0 %}
             <h5>Search Store</h5>
           {% else %}
             <h5>Search Aperture</h5>
@@ -17,12 +17,15 @@
               <button class="btn btn-3 btn-outline-light" type="button" id="button-addon2">Search</button>
             </div>
           </div>
-          {% if stores %}
+          {% if stores.count >= 0 %}
           <h5>View Aperture</h5>
           <a href="{% url 'view_aperture' %}"><button class="btn btn-4 btn-block btn-outline-light" id="button-addon2">Cklick Here !!!</button></a>
+          {% else %}
+          <h5>View Store</h5>
+          <a href="{% url 'index' %}"><button class="btn btn-4 btn-block btn-outline-light" id="button-addon2">Cklick Here !!!</button></a>
           {% endif %}
         </div>
-        <img src="{% static 'termi.jpg' %}" class="card-img-bottom" alt="image">
+        <img src="{% static 'termi21.jpg' %}" class="card-img-bottom" alt="image">
       </div>
     </div>
     <div class="col-8 ml-3 mt-3">

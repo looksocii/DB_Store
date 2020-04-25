@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from datetime import datetime, timedelta
 
 # ----------------------- ตั้งค่าที่ตั้งที่ใช้เก็บไฟล์รูปที่อัพโหลดลงบนหน้าเว็บ ---------------------- #
-location = 'media'
+location = 'media/'
 # ------------------------------------------------------------------------------------ #
 
 """
@@ -71,6 +71,21 @@ class Employee(models.Model): # ข้อมูลพนักงานห้า
     def __str__(self):
         return self.account_acc_id.first_name
 
+class Manager(models.Model): # ข้อมูลผู้จัดการร้านค้า
+    """
+        ข้อมูลผู้จัดการถูกสร้างโดย user
+        ซึ่งจะถูกสร้างหลังจากที่กรอก form สร้างบริษัทแล้ว (ต้องกำหนดว่าใครเป้นคนจัดการบริษัทนี้)
+        (สร้าง form)
+    """
+    manag_id = models.AutoField(primary_key=True, validators=[MaxValueValidator(10)]) #กำหนดให้ใส่ได้แค่ 10 หลัก
+    manag_fname = models.CharField(max_length=255)
+    manag_lname = models.CharField(max_length=255)
+    manag_level = models.IntegerField(validators=[MaxValueValidator(10)]) #กำหนดให้ใส่ได้แค่ 10 หลัก
+    manag_phone = models.CharField(max_length=10, unique=True)
+
+    def __str__(self):
+        return self.manag_fname
+
 class Company(models.Model): # ข้อมูลบริษัท
     """
         เมื่อ user สมัครสมาชิกเสร็จแล้วจะยังไม่ทำการสร้างข้อมูล Company แต่จะมี Account แล้ว
@@ -120,21 +135,6 @@ class Sale(models.Model): # ข้อมูลพนักงานฝ่าย�
     def __str__(self):
         return self.employee_emp_id.account_acc_id.first_name
 
-class Manager(models.Model): # ข้อมูลผู้จัดการร้านค้า
-    """
-        ข้อมูลผู้จัดการถูกสร้างโดย user
-        ซึ่งจะถูกสร้างหลังจากที่กรอก form สร้างบริษัทแล้ว (ต้องกำหนดว่าใครเป้นคนจัดการบริษัทนี้)
-        (สร้าง form)
-    """
-    manag_id = models.AutoField(primary_key=True, validators=[MaxValueValidator(10)]) #กำหนดให้ใส่ได้แค่ 10 หลัก
-    manag_fname = models.CharField(max_length=255)
-    manag_lname = models.CharField(max_length=255)
-    manag_level = models.IntegerField(validators=[MaxValueValidator(10)]) #กำหนดให้ใส่ได้แค่ 10 หลัก
-    manag_phone = models.CharField(max_length=10, unique=True)
-
-    def __str__(self):
-        return self.manag_fname
-
 class Store(models.Model): # ข้อมูลร้านค้า
     """
         ข้อมูลร้านค้าถูกสร้างโดย user หลังจากที่กรอกข้อมูลบริษัทแล้ว (user กดปุ่มเพิ่มร้านค้า)
@@ -145,8 +145,8 @@ class Store(models.Model): # ข้อมูลร้านค้า
     store_pic = models.ImageField(upload_to=location, default=None)
     branch = models.CharField(max_length=255)
     phone = models.CharField(max_length=10)
-    cost_total = models.FloatField()
-    repaired = models.CharField(max_length=255)
+    cost_total = models.FloatField(blank=True, null=True)
+    repaired = models.CharField(max_length=255, blank=True, null=True)
     other_notes = models.TextField()
     # --------------------------------------- มีความสัมพันธ์กับตารางอื่น ---------------------------------------
     manage_manag_id = models.ForeignKey(Manager, on_delete=models.CASCADE)
@@ -167,7 +167,7 @@ class Cost(models.Model): # ข้อมูลค่าใช้จ่าย
     repair_fee = models.FloatField()
     insurance_fee = models.FloatField()
     other_fee = models.FloatField()
-    date = models.DateField()
+    date = models.DateField(auto_now=True)
     # --------------------------------------- มีความสัมพันธ์กับตารางอื่น ---------------------------------------
     accountant_employee_emp_id = models.ForeignKey(Accountant, on_delete=models.CASCADE)
     store_store_id = models.ForeignKey(Store, on_delete=models.CASCADE)
