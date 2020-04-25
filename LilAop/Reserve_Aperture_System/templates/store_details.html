@@ -23,17 +23,21 @@
                         <h4>สาขา : {{ store.branch }}</h4>
                     </div>
                     <div class="col-3">
-                        <h4>ค่าใช้จ่ายทั้งหมด : {{ store.cost_total }}</h4>
+                        {% if cost_total %}
+                            <h4>ค่าใช้จ่ายทั้งหมด : {{ cost_total }}</h4>
+                        {% else %}
+                            <h4>ค่าใช้จ่ายทั้งหมด : {{ store.cost_total }}</h4>
+                        {% endif %}
                     </div>
                     <div class="col-3">
-                        <h4>ชื่อผู้จัดการร้านค้า : {{ store.manage_manag_id.manag_fname }}</h4>
+                        <h4>ชื่อผู้จัดการร้านค้า : {{ store.manage_manag_id.manag_fname }} {{ store.manage_manag_id.manag_lname }}</h4>
                     </div>
                 </div>
             </div>
             <div class="col-12">
                 <div class="row mt-4">
                     <div class="col-3">
-                        <h4>รหัสบริษัท : {{ store.company_company_id.company_id }}</h4>
+                        <h4>ชื่อบริษัท : {{ store.company_company_id.company_name }}</h4>
                     </div>
                     <div class="col-3">
                         <h4>รายการซ่อมแซม : {{ store.repaired }}</h4>

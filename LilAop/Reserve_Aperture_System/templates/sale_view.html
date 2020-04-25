@@ -11,9 +11,9 @@
                 </div>
                 <div class="col-6">
                     {% if aper.aper_status %}
-                        <h4>สถานะพื้นที่ : ไม่ว่าง</h4>
+                        <h4 class="text-danger">สถานะพื้นที่ : ไม่ว่าง ( {{ aper.store_store_id.store_name }} )</h4>
                     {% else %}
-                        <h4>สถานะพื้นที่ : ว่าง</h4>
+                        <h4 class="text-success">สถานะพื้นที่ : ว่าง</h4>
                     {% endif %}
                 </div>
             </div>

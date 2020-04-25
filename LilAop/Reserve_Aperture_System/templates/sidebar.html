@@ -17,12 +17,14 @@
               <button class="btn btn-3 btn-outline-light" type="button" id="button-addon2">Search</button>
             </div>
           </div>
-          {% if stores.count >= 0 %}
-          <h5>View Aperture</h5>
-          <a href="{% url 'view_aperture' %}"><button class="btn btn-4 btn-block btn-outline-light" id="button-addon2">Cklick Here !!!</button></a>
-          {% else %}
-          <h5>View Store</h5>
-          <a href="{% url 'index' %}"><button class="btn btn-4 btn-block btn-outline-light" id="button-addon2">Cklick Here !!!</button></a>
+          {% if perms.management.add_cost == False %}
+            {% if stores.count >= 0 %}
+              <h5>View Aperture</h5>
+              <a href="{% url 'view_aperture' %}"><button class="btn btn-4 btn-block btn-outline-light" id="button-addon2">Cklick Here !!!</button></a>
+            {% else %}
+              <h5>View Store</h5>
+              <a href="{% url 'index' %}"><button class="btn btn-4 btn-block btn-outline-light" id="button-addon2">Cklick Here !!!</button></a>
+            {% endif %}
           {% endif %}
         </div>
         <img src="{% static 'termi21.jpg' %}" class="card-img-bottom" alt="image">

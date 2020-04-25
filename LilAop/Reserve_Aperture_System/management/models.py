@@ -84,7 +84,7 @@ class Manager(models.Model): # ข้อมูลผู้จัดการร�
     manag_phone = models.CharField(max_length=10, unique=True)
 
     def __str__(self):
-        return self.manag_fname
+        return self.manag_fname+' '+self.manag_lname
 
 class Company(models.Model): # ข้อมูลบริษัท
     """

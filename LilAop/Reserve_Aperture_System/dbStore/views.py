@@ -34,16 +34,15 @@ def my_login(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        # --------------- เช็คว่า username, password มีอยู่ในข้อมูลหรือไม่ ----------------
         user = authenticate(request, username=username, password=password)
         if user:
             login(request, user)
-            # next_url = request.POST.get('next_url')
-            # if next_url:
-            #     return redirect(next_url)
-            # else:
-            return redirect('index')
-        else: # ไม่มีอยู่ในข้อมูล
+            next_url = request.POST.get('next_url')
+            if next_url:
+                return redirect(next_url)
+            else:
+                return redirect('index')
+        else:
             context = {
                 'username': username,
                 'password': password,
@@ -51,14 +50,10 @@ def my_login(request):
                 'login_page': "login_page"
             }
             return render(request, 'login.html', context)
-        # -------------------------------------------------------------------------
-        
 
-    # # -------- เมื่อมีการส่ง request next มา ----------
-    # next_url = request.GET.get('next')
-    # if next_url:
-    #     context['next_url'] = next_url
-    # # --------------------------------------------
+    next_url = request.GET.get('next')
+    if next_url:
+        context['next_url'] = next_url
 
     return render(request, 'login.html', context)
 
@@ -114,8 +109,13 @@ def my_register(request):
 
 def store_detail(request, store_id):
     store = Store.objects.get(pk=store_id)
+    try:
+        cost = Cost.objects.get(store_store_id=store_id)
+    except ObjectDoesNotExist:
+        cost = None
     return render(request, 'store.html', {
-        'store': store
+        'store': store,
+        'cost': cost
     })
 
 def aperture_detail(request, aperture_id):
@@ -124,6 +124,8 @@ def aperture_detail(request, aperture_id):
         'aperture': aperture
     })
 
+@login_required
+@permission_required('management.view_aperture')
 def add_manager(request, aperture_id):
     aperture = Aperture.objects.get(pk=aperture_id)
     if request.method == 'POST':
@@ -143,31 +145,28 @@ def add_manager(request, aperture_id):
     })
 
 def edit_store(request, store_id):
-    store = Store.objects.get(pk=store_id)
-    if request.method == 'POST':
-        store.store_name = request.POST.get('store_name')
-        store.phone = request.POST.get('phone')
-        store.store_id = request.POST.get('store_id')
-        store.branch = request.POST.get('branch')
-        store.cost_total = request.POST.get('cost_total')
-        store.manage_manag_id.manag_fname = request.POST.get('manag_fname')
-        store.company_company_id.company_name = request.POST.get('company_name')
-        store.repaired = request.POST.get('repaired')
-        store.other_notes = request.POST.get('other_notes')
-        store.save()
-        return render(request, 'store_details.html', {
-            'store': store
-        })
-
+    store = Store.objects.get(store_id=store_id)
+    form = StoreForm(request.POST or None, request.FILES or None, instance=store)
+    if form.is_valid():
+        form.save()
+        return redirect('index')
     return render(request, 'edit_store.html', {
+        'form': form,
         'store': store
     })
 
 def store_detail_edit(request, store_id):
+    context = dict()
     store = Store.objects.get(pk=store_id)
-    return render(request, 'store_details.html', {
-        'store': store
-    })
+    try:
+        cost = Cost.objects.get(store_store_id=store_id)
+    except ObjectDoesNotExist:
+        cost = None
+    if cost:
+        cost_total = cost.electric_bill+cost.water_bill+cost.rent_fee+cost.repair_fee+cost.insurance_fee+cost.other_fee
+        context['cost_total'] = cost_total
+    context['store'] = store
+    return render(request, 'store_details.html', context)
 
 def sale_view(request, aper_id):
     aper = Aperture.objects.get(pk=aper_id)
@@ -194,6 +193,10 @@ def add_store(request, aper_id):
 def remove_store(request, store_id):
     if request.method == 'POST':
         store = Store.objects.get(pk=store_id)
+        aper = Aperture.objects.get(store_store_id=store_id)
+        aper.aper_status = False
+        aper.store_store_id = None
+        aper.save()
         store.delete()
         return redirect('index')
         
@@ -204,13 +207,15 @@ def remove_store(request, store_id):
 def edit_expenses(request, store_id):
     store = Store.objects.get(pk=store_id)
     aper = Aperture.objects.get(store_store_id=store_id)
-    if request.method == 'POST':
-        form = CostForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('index')
-    else:
-        form = CostForm()
+    try:
+        instance = Cost.objects.get(store_store_id=store_id)
+    except ObjectDoesNotExist:
+        instance = None
+
+    form = CostForm(request.POST or None, instance=instance)
+    if form.is_valid():
+        form.save()
+        return redirect('index')
     return render(request, 'edit_expenses.html', {
         'form': form,
         'store': store,
@@ -221,8 +226,10 @@ def expenses_details(request, store_id):
     store = Store.objects.get(pk=store_id)
     aper = Aperture.objects.get(store_store_id=store_id)
     cost = Cost.objects.get(store_store_id=store_id)
+    cost_total = cost.electric_bill+cost.water_bill+cost.rent_fee+cost.repair_fee+cost.insurance_fee+cost.other_fee
     return render(request, 'add_expenses.html', {
         'store': store,
         'aper': aper,
-        'cost': cost
+        'cost': cost,
+        'cost_total': cost_total
     })
