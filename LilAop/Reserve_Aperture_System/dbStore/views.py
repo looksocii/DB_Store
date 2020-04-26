@@ -160,11 +160,13 @@ def store_detail_edit(request, store_id):
     context = dict()
     store = Store.objects.get(pk=store_id)
     try:
-        cost = Cost.objects.get(store_store_id=store_id)
+        costs = Cost.objects.filter(store_store_id=store_id)
     except ObjectDoesNotExist:
-        cost = None
-    if cost:
-        cost_total = cost.electric_bill+cost.water_bill+cost.rent_fee+cost.repair_fee+cost.insurance_fee+cost.other_fee
+        costs = None
+    if costs:
+        cost_total = 0
+        for cost in costs:
+            cost_total += cost.electric_bill+cost.water_bill+cost.rent_fee+cost.repair_fee+cost.insurance_fee+cost.other_fee
         context['cost_total'] = cost_total
     context['store'] = store
     return render(request, 'store_details.html', context)
@@ -205,6 +207,23 @@ def remove_store(request, store_id):
         'store_id': store_id
     })
 
+def add_expenses(request, store_id):
+    store = Store.objects.get(pk=store_id)
+    aper = Aperture.objects.get(store_store_id=store_id)
+    if request.method == 'POST':
+        form = CostForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = CostForm()
+    return render(request, 'edit_expenses.html', {
+        'form': form,
+        'store': store,
+        'aper': aper,
+        'add': 'add'
+    })
+
 def edit_expenses(request, store_id):
     store = Store.objects.get(pk=store_id)
     aper = Aperture.objects.get(store_store_id=store_id)
@@ -226,7 +245,7 @@ def edit_expenses(request, store_id):
 def expenses_details(request, store_id):
     store = Store.objects.get(pk=store_id)
     aper = Aperture.objects.get(store_store_id=store_id)
-    cost = Cost.objects.get(store_store_id=store_id)
+    cost = Cost.objects.filter(store_store_id=store_id).latest('cost_id')
     cost_total = cost.electric_bill+cost.water_bill+cost.rent_fee+cost.repair_fee+cost.insurance_fee+cost.other_fee
     return render(request, 'add_expenses.html', {
         'store': store,

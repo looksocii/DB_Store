@@ -15,6 +15,7 @@ urlpatterns = [
     path('sale_view/<int:aper_id>/', views.sale_view, name='sale_view'),
     path('add_store/<int:aper_id>/', views.add_store, name='add_store'),
     path('remove_store/<int:store_id>/', views.remove_store, name='remove_store'),
+    path('add_expenses/<int:store_id>/', views.add_expenses, name='add_expenses'),
     path('edit_expenses/<int:store_id>/', views.edit_expenses, name='edit_expenses'),
     path('expenses_details/<int:store_id>/', views.expenses_details, name='expenses_details'),
 ]

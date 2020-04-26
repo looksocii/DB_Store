@@ -10,7 +10,10 @@
                             <div class="card-body">
                                 <h5 class="navbar-brand text-light">{{ store.store_name }}<br>ที่ตั้ง : {{ aper.aper_loc }}<br>ราคาที่ : {{ aper.aper_price }} บาท/เดือน</h5>
                                 {% if perms.management.change_cost %}
-                                  <a href="{% url 'edit_expenses' store.store_id %}"><button class="btn btn-4 btn-block btn-warning" type="submit">Edit expenses and bills</button></a>
+                                  <a href="{% url 'edit_expenses' store.store_id %}"><button class="btn btn-4 btn-block btn-warning mb-2">Edit expenses and bills</button></a>
+                                {% endif %}
+                                {% if perms.management.add_cost %}
+                                  <a href="{% url 'add_expenses' store.store_id %}"><button class="btn btn-4 btn-block btn-warning">Add expenses and bills</button></a>
                                 {% endif %}
                             </div>
                         <img src="{{ store.store_pic.url }}" class="card-img-bottom h-500px">

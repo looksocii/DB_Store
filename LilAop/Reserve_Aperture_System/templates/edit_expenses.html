@@ -2,7 +2,11 @@
 {% load static %}
 {% block sidebar %}
 <div class="container-fluid ml-0 pl-0">
+  {% if add %}
+  <form action="{% url 'add_expenses' store.store_id %}" method="POST" enctype="multipart/form-data">
+  {% else %}
   <form action="{% url 'edit_expenses' store.store_id %}" method="POST" enctype="multipart/form-data">
+  {% endif %}
     {% csrf_token %}
   <div class="row">
     <div class="col">
@@ -11,7 +15,7 @@
           <div class="card mt-3 w-100 ml-3 bg-dark">
             <div class="card-body">
               <h5 class="navbar-brand text-light">{{ store.store_name }}<br>ที่ตั้ง : {{ aper.aper_loc }}<br>ราคาที่ : {{ aper.aper_price }} บาท/เดือน</h5>
-              <a href="Edit.html"> <button class="btn btn-4 btn-block btn-warning" type="submit" id="button-addon2">Save</button></a>
+              <button class="btn btn-4 btn-block btn-warning" type="submit" id="button-addon2">Save</button>
             </div>
             <img src="{{ store.store_pic.url }}" class="card-img-bottom h-500px">
             <div class="row">

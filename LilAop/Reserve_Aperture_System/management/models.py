@@ -173,7 +173,7 @@ class Cost(models.Model): # ข้อมูลค่าใช้จ่าย
     store_store_id = models.ForeignKey(Store, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.cost_id
+        return self.store_store_id.store_name
 
 class Aperture(models.Model): # ข้อมูลพื้นที่ห้องว่าง
     """
