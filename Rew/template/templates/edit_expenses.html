@@ -4,14 +4,13 @@
 <div class="container-fluid ml-0 pl-0">
   <form action="{% url 'edit_expenses' store.store_id %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-  <div class="row">
+  <div class="row mt-5 pb-3">
     <div class="col">
       <div class="row">
         <div class="side-bar col-3 ">
-          <div class="card mt-3 w-100 ml-3 bg-dark">
+          <div class="card mt-3 w-100 ml-3 bg-light">
             <div class="card-body">
               <h5 class="navbar-brand text-light">{{ store.store_name }}<br>ที่ตั้ง : {{ aper.aper_loc }}<br>ราคาที่ : {{ aper.aper_price }} บาท/เดือน</h5>
-              <a href="Edit.html"> <button class="btn btn-4 btn-block btn-warning" type="submit" id="button-addon2">Save</button></a>
             </div>
             <img src="{{ store.store_pic.url }}" class="card-img-bottom h-500px">
             <div class="row">
@@ -26,9 +25,9 @@
         </div>
 
         <div class="col">
-          <div class="row mt-3">
+          <div class="row mt-5">
             <div class="col-sm ">
-              <table class="table table-bordered">
+              <table class="table table-striped bg-light">
                 <tbody>
                   <tr>
                     <th scope="row">ค่าไฟ</th>
@@ -40,7 +39,7 @@
                   </tr>
                   <tr>
                     <th scope="row">ค่าเช่าพื้นที่</th>
-                    <td>{{ form.rent_fee }}</td>
+                    <td readonly>{{ form.rent_fee }}</td>
                   </tr>
                   <tr>
                     <th scope="row">ค่าซ่อมเเซม</th>
@@ -64,6 +63,7 @@
                   </tr>
                 </tbody>
               </table>
+              <button class="btn btn-3 btn-lg btn-block" type="submit" id="button-addon2">SAVE</button>
             </div>
 
           </div>

@@ -2,11 +2,11 @@
 {% block sidebar %}
 {% load static %}
     <div class="container">
-        <div class="row p-5">
-            <div class="col-6 text-center p-3">
-                <img src="{% static '/photo/logo.png' %}">
+        <div class="row p-5 bg-white">
+            <div class="col-6 text-center p-1">
+                <img src="{% static 'logo.png' %}">
             </div>
-            <div class="col-6 p-3">
+            <div class="col-6 p-3 mt-5">
                 <form action="{% url 'login' %}" method="POST">
                     {% csrf_token %}
                     <div class="form-group">
@@ -24,7 +24,7 @@
                         {% endif %} required>
                     </div>
                     {% comment %} ----- รับตัวแปร next_url เมื่อมีการส่งค่ามา ----- {% endcomment %}
-                    {% comment %} <input type="hidden" name="next_url" value="{{ next_url }}"> {% endcomment %}
+                    <input type="hidden" name="next_url" value="{{ next_url }}">
                     {% comment %} ------------------------------------------ {% endcomment %}
 
                     {% comment %} --------------------------------- เช็คว่ามี error หรือไม่ ( ชื่อผู้ใช้และรหัสผ่านไม่ถูกต้อง ) --------------------------------- {% endcomment %}

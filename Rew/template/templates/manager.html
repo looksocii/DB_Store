@@ -3,7 +3,7 @@
 {% block sidebar %}
 <form action="{% url 'add_manager' aperture_id %}" method="POST">
     {% csrf_token %}
-    <div class="container pt-3 text-center bg-light">
+    <div class="container text-center">
         <h1 class="mt-5">Complete your manager information</h1>
         <h5 class="mt-5">ข้อมูลผู้จัดการร้านค้า</h5>
         <div class="row form">
@@ -24,16 +24,16 @@
             <div class="form-group col-5 ml-auto">
                 <div class="row mb-3">
                     <div class="col-10 mb-2">
-                        <input class="form-control" type="text" name="manag_fname">
+                        <input class="form-control input" type="text" name="manag_fname">
                     </div>
                     <div class="col-10 mb-2">
-                        <input class="form-control" type="text" name="manag_lname">
+                        <input class="form-control input" type="text" name="manag_lname">
                     </div>
                     <div class="col-10 mb-2">
-                        <input class="form-control" type="text" name="manag_level">
+                        <input class="form-control input" type="text" name="manag_level">
                     </div>
                     <div class="col-10">
-                        <input class="form-control" type="text" name="manag_phone">
+                        <input class="form-control input" type="text" name="manag_phone">
                     </div>
                 </div>
             </div>

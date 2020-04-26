@@ -1,10 +1,23 @@
 {% extends 'nav.html' %}
 {% block sidebar %}
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+            $('#blah').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
 <div class="row-2 m-3">
+    <form action="{% url 'edit_store' store.store_id %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
     <div class="col-12">
         <div class="row">
-            <div class="col-7 p-7 text-white">
-                <table class="table" >
+            <div class="col-7 p-7">
+                <table class="table table-striped bg-ligh" >
                     <thead>
                         <tr>
                             <th colspan="2" >
@@ -15,106 +28,61 @@
                     <tbody>
                         <tr align="center">
                             <td>ชื่อร้านค้า</td>
-                            <td>xxxxxxxxxxxx</td>
+                            <td>{{ form.store_name }}</td>
                         </tr>
                         <tr align="center">
                             <td>เบอร์โทรร้านค้า</td>
-                            <td>xxxxxxxxxxxx</td>
-                        </tr>
-                        <tr align="center">
-                            <td>รหัสร้านค้า</td>
-                            <td>xxxxxxxxxxxx</td>
+                            <td>{{ form.phone }}</td>
                         </tr>
                         <tr align="center">
                             <td>ชื่อสาขาร้าน</td>
-                            <td>xxxxxxxxxxxx</td>
+                            <td>{{ form.branch }}</td>
                         </tr>
                         <tr align="center">
                             <td>ค่าใช้จ่ายทั้งหมด</td>
-                            <td>xxxxxxxxxxxx</td>
-                        </tr>
-                        <tr align="center">
-                            <td>รหัสผู้จัดการร้าน</td>
-                            <td>xxxxxxxxxxxx</td>
-                        </tr>
-                        <tr align="center">
-                            <td>รหัสบริษัท</td>
-                            <td>xxxxxxxxxxxx</td>
+                            <td>{{ form.cost_total }}</td>
                         </tr>
                         <tr align="center">
                             <td>รายการที่ซ่อมแซม</td>
-                            <td>xxxxxxxxxxxx</td>
-                        </tr>
-                        <tr align="center">
-                            <td>ค่าไฟ</td>
-                            <td>xxxxxxxxxxxx</td>
-                        </tr>
-                        <tr align="center">
-                            <td>ค่าน้ำ</td>
-                            <td>xxxxxxxxxxxx</td>
-                        </tr>
-                        <tr align="center">
-                            <td>ค่าเช่าพื้นที่</td>
-                            <td>xxxxxxxxxxxx</td>
-                        </tr>
-                        <tr align="center">
-                            <td>ค่าซ่อมแซม</td>
-                            <td>xxxxxxxxxxxx</td>
-                        </tr>
-                        <tr align="center">
-                            <td>ค่าประกัน</td>
-                            <td>xxxxxxxxxxxx</td>
-                        </tr>
-                        <tr align="center">
-                            <td>ค่าใช้จ่ายอื่นๆ</td>
-                            <td>xxxxxxxxxxxx</td>
-                        </tr>
-                        <tr align="center">
-                            <td>วันที่สร้างบิล</td>
-                            <td>xxxxxxxxxxxx</td>
+                            <td>{{ form.repaired }}</td>
                         </tr>
                         <tr align="center">
                             <td>หมายเหตุ</td>
-                            <td>xxxxxxxxxxxx</td>
+                            <td>{{ form.other_notes }}</td>
+                        </tr>
+                        <tr align="center">
+                            <td>ชื่อผู้จัดการร้านค้า</td>
+                            <td>{{ form.manage_manag_id }}</td>
+                        </tr>
+                        <tr align="center">
+                            <td>ชื่ออบริษัทร้านค้า</td>
+                            <td>{{ form.company_company_id }}</td>
+                        </tr>
+                        <tr align="center">
+                            <td>เลือกรูปภาพร้านค้า</td>
+                            <td>{{ form.store_pic }}</td>
                         </tr>
                     </tbody>
                 </table>
 
 
             </div>
-            <div class="col-4 p-5 ml-5 bg-dark text-white">
-                <div class="bg-white text-white">
-                    <Br>
-                    <br>
-                    <br>
-                    <br>
-                    <Br>
-                    <Br>
-                    <br>
-                    <br>
-                    <br>
-                    <Br>
-                    <Br>
-                    <br>
-                    <br>
-                    <br>
-                    <Br>
-                    <Br>
-                    <br>
-                    <br>
-                    <br>
-
+            <div class="col-4 p-5 ml-5 bg-light">
+                <div class="bg-white">
+                    <img id="blah" width="400px" src="{{ store.store_pic.url }}">
                 </div>
                 <br>
                 <center>
                     <br>
                     <h4>You want to save details?</h4>
+                    {{ form.errors }}
                 </center>
                 <br>
-                <button type="button" class="btn btn-warning btn-lg btn-block">Save</button><br>
-                <button type="button" class="btn btn-warning btn-lg btn-block">Back</button>
+                <button type="submit" class="btn btn-3 btn-lg btn-block">Save</button><br>
+                <a href="{% url 'index' %}"><button type="button" class="btn btn-4 btn-lg btn-block">Back</button></a>
             </div>
         </div>
     </div>
+    </form>
 </div>
 {% endblock sidebar %}

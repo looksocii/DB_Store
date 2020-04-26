@@ -1,64 +1,56 @@
 {% extends "nav.html" %}
 {% load static %}
 {% block sidebar %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <img class=" aperture rounded img-fluid" src="{% static 'panorama.jpg' %}" alt="">
+<div class="container">
+    <div class="row mt-5 bg-light rounded-lg">
+        <div class="col-5 p-3">
+            <img class="aperture rounded img-fluid" src="{{ aperture.aper_pic.url }}">
         </div>
-    </div>
-    <div class="row">
-        <div class="col-5 mt-3 p-5">
-            <h3 class="m-5">You want to book this aperture</h3>
-            <form action="">
-                <button type="submit" class="btn btn-5 btn-light mt-3 mx-10">Submit</button>
-            </form>
-        </div>
-        <div class="col-7">
+        <div class="col-7 mt-3">
             <div class="row form">
                 <div class="form-group col-3">
                     <div class="row justify-content-end mr-5 mb-3">
-                        <label for="inputPassword" class="input">ชื่อผู้จัดการบริษัท</label>
+                        <label for="inputPassword" class="input">รหัสห้องว่าง</label>
                     </div>
                     <div class="row justify-content-end mr-5 mb-3">
-                        <label for="inputPassword" class="input">นามสกุลผู้จัดการ</label>
+                        <label for="inputPassword" class="input">ขนาดพื้นที่</label>
                     </div>
                     <div class="row justify-content-end mr-5 mb-3">
-                        <label for="inputPassword" class="input">ตำแหน่ง</label>
+                        <label for="inputPassword" class="input">ที่ตั้ง</label>
                     </div>
                 </div>
                 <div class="form-group col-3 ml-auto">
                     <div class="row mb-3">
-                        <p class="text-muted">**************</p>
+                        <p class="text-muted">{{ aperture.aper_id }}</p>
                     </div>
                     <div class="row mb-3">
-                        <p class="text-muted">**************</p>
+                        <p class="text-muted">{{ aperture.aper_area }} ตารางเมตร</p>
                     </div>
                     <div class="row mb-3">
-                        <p class="text-muted">**************</p>
+                        <p class="text-muted">{{ aperture.aper_loc }}</p>
                     </div>
                 </div>
                 <div class="form-group col-3">
                     <div class="row justify-content-end mr-5 mb-3">
-                        <label for="inputPassword" class="input">ชื่อผู้จัดการบริษัท</label>
+                        <label for="inputPassword" class="input">วันที่ออกสัญญา</label>
                     </div>
                     <div class="row justify-content-end mr-5 mb-3">
-                        <label for="inputPassword" class="input">นามสกุลผู้จัดการ</label>
-                    </div>
-                    <div class="row justify-content-end mr-5 mb-3">
-                        <label for="inputPassword" class="input">ตำแหน่ง</label>
+                        <label for="inputPassword" class="input">ราคาพื้นที่</label>
                     </div>
                 </div>
                 <div class="form-group col-3 ml-auto">
                     <div class="row mb-3">
-                        <p class="text-muted">**************</p>
+                        <p class="text-muted">{{ aperture.issue_date }}</p>
                     </div>
                     <div class="row mb-3">
-                        <p class="text-muted">**************</p>
+                        <p class="text-muted">{{ aperture.aper_price }} บาท/เดือน</p>
                     </div>
-                    <div class="row mb-3">
-                        <p class="text-muted">**************</p>
-                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12 mt-3">
+                    <a href="{% url 'add_manager' aperture.aper_id %}"><button type="button"
+                            class="btn btn-5 btn-light btn-lg btn-block">Booking Now</button></a>
                 </div>
             </div>
         </div>

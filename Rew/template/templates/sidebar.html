@@ -6,18 +6,28 @@
     <div class="side-bar col-3">
       <div class="card mt-3 w-100">
         <div class="card-body">
-          <h5>Search Store</h5>
+          {% if stores.count >= 0 %}
+            <h5>Search Store</h5>
+          {% else %}
+            <h5>Search Aperture</h5>
+          {% endif %}
           <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username"
-              aria-describedby="button-addon2">
+            <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
             <div class="input-group-append">
               <button class="btn btn-3 btn-outline-light" type="button" id="button-addon2">Search</button>
             </div>
           </div>
-          <h5>View Aperture</h5>
-          <button class="btn btn-4 btn-block btn-outline-light" type="submit" id="button-addon2">Button</button>
+          {% if perms.management.add_cost == False %}
+            {% if stores.count >= 0 %}
+              <h5>View Aperture</h5>
+              <a href="{% url 'view_aperture' %}"><button class="btn btn-4 btn-block btn-outline-light" id="button-addon2">Cklick Here !!!</button></a>
+            {% else %}
+              <h5>View Store</h5>
+              <a href="{% url 'index' %}"><button class="btn btn-4 btn-block btn-outline-light" id="button-addon2">Cklick Here !!!</button></a>
+            {% endif %}
+          {% endif %}
         </div>
-        <img src="{% static 'image.png' %}" class="card-img-bottom" alt="image">
+        <img src="{% static 'termi21.jpg' %}" class="card-img-bottom" alt="image">
       </div>
     </div>
     <div class="col-8 ml-3 mt-3">
