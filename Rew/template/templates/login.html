@@ -2,11 +2,11 @@
 {% block sidebar %}
 {% load static %}
     <div class="container">
-        <div class="row p-5 bg-white">
-            <div class="col-6 text-center p-1">
+        <div class="row bg-white mt-5">
+            <div class="col-5 text-center p-1">
                 <img src="{% static 'logo.png' %}">
             </div>
-            <div class="col-6 p-3 mt-5">
+            <div class="col-7 px-5 mt-5">
                 <form action="{% url 'login' %}" method="POST">
                     {% csrf_token %}
                     <div class="form-group">
@@ -35,7 +35,7 @@
                         {% endif %}
                     {% comment %} ---------------------------------------------------------------------------------------------------------------- {% endcomment %}
 
-                    <button type="submit" class="btn btn-outline-primary btn-lg btn-block">Login</button>
+                    <button type="submit" class="btn btn-5 btn-lg btn-block">Login</button>
                 </form>
             </div>
         </div>

@@ -1,11 +1,11 @@
 {% extends "sidebar.html" %}
 {% load static %}
 {% block content %}
-<div class="row mt-5">
+<div class="row mt-3">
 
     {% if st %}
     {% for store in stores %}
-      <div class="col-3">
+      <div class="col-3 p-4 bg-white">
         <div class="card aperture">
           <img src="{{ store.store_pic.url }}" class="image-aperture rounded" alt="image">
           {% if perms.management.add_cost %}
@@ -30,7 +30,7 @@
     {% endfor %}
     {% else %}
     {% for aperture in apertures %}
-      <div class="col-3">
+      <div class="col-3 p-4 bg-white">
         <div class="card aperture">
           <img src="{{ aperture.aper_pic.url }}" class="image-aperture rounded" alt="image">
             {% if aperture.aper_status == True and aperture.store_store_id == null %}

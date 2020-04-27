@@ -1,7 +1,7 @@
 {% extends "nav.html" %}
 {% load static %}
 {% block sidebar %}
-<div class="container">
+<div class="container mt-5 pt-5">
     <div class="row mt-5 bg-light rounded-lg">
         <div class="col-5 p-3">
             <img class="aperture rounded img-fluid" src="{{ aperture.aper_pic.url }}">
@@ -47,8 +47,8 @@
                     </div>
                 </div>
             </div>
-            <div class="row mt-5">
-                <div class="col-12 mt-3">
+            <div class="row">
+                <div class="col-12">
                     <a href="{% url 'add_manager' aperture.aper_id %}"><button type="button"
                             class="btn btn-5 btn-light btn-lg btn-block">Booking Now</button></a>
                 </div>

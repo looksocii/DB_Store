@@ -20,10 +20,10 @@
           {% if perms.management.add_cost == False %}
             {% if stores.count >= 0 %}
               <h5>View Aperture</h5>
-              <a href="{% url 'view_aperture' %}"><button class="btn btn-4 btn-block btn-outline-light" id="button-addon2">Cklick Here !!!</button></a>
+              <a href="{% url 'view_aperture' %}" class="text-decoration-none"><button class="btn btn-4 btn-block btn-outline-light" id="button-addon2">Cklick Here !!!</button></a>
             {% else %}
               <h5>View Store</h5>
-              <a href="{% url 'index' %}"><button class="btn btn-4 btn-block btn-outline-light" id="button-addon2">Cklick Here !!!</button></a>
+              <a href="{% url 'index' %}" class="text-decoration-none"><button class="btn btn-4 btn-block btn-outline-light" id="button-addon2">Cklick Here !!!</button></a>
             {% endif %}
           {% endif %}
         </div>
