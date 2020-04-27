@@ -1,0 +1,74 @@
+{% extends "sidebar.html" %}
+{% load static %}
+{% block content %}
+<div class="row">
+
+    {% if st %}
+    {% for store in stores %}
+    <div class="col-3 p-4">
+      <div class="card shadow rounded" style="width: 18rem; height: 23rem;">
+        <img src="{{ store.store_pic.url }}" class="card-img-top" alt="Card imagecap" style="height: 10rem;">
+        <div class="card-body d-flex flex-column">
+          <p class="card-title text-center h4 ">{{ store.store_name }}</p>
+          <p class="card-title text-center h6 font-weight-bolder text-muted">Phone : {{ store.phone }}</p>
+          <p class="card-title text-center h6 font-weight-bolder text-muted">{{ store.other_notes }}</p>
+          
+          
+        </div>
+        
+        {% if perms.management.add_cost %}
+            {% for c in cost %}
+              {% if c.0 == store.store_id %}
+                {% if c.1 > 0 %}
+                <a href="{% url 'expenses_details' store.store_id %}" class="btn btn-success mt-autofloat-right mr-3 ml-3">View Expenses and Bill</a>
+                <br>
+                {% else %}
+                <a href="{% url 'edit_expenses' store.store_id %}" class="btn btn-success mt-autofloat-right mr-3 ml-3">Add Expenses and Bill</a>
+                <br>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+        {% else %}
+          {% if perms.management.change_store %}
+          <a href="{% url 'store_detail_edit' store.store_id %}" class="btn btn-danger mt-autofloat-right mr-3 ml-3">view</a>
+          <br>
+          {% else %}
+          
+            <a href="{% url 'store_detail' store.store_id %}" class="btn btn-danger mt-autofloat-right mr-3 ml-3">view</a>
+            <br>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+    {% else %}
+    {% for aperture in apertures %}
+      <div class="col-3 p-4">
+        <div class="card shadow rounded" style="width: 18rem; height: 23rem;">
+          <img src="{{ aperture.aper_pic.url }}" class="card-img-top" alt="Card imagecap" style="height: 10rem;">
+        
+          <div class="card-body d-flex flex-column">
+            <p class="card-title text-center h4 ">{{ aperture.aper_loc }}</p>
+          <p class="card-title text-center h6 font-weight-bolder text-muted">Price: {{ aperture.aper_price }} Baht</p><br>
+         
+         
+
+            <br>
+        
+            {% if aperture.aper_status == True and aperture.store_store_id == null %}
+              <a href="{% url 'add_store' aperture.aper_id %}" class="btn btn-success mt-autofloat-right mr-3 ml-3">Add Store</a>
+            {% else %}
+              {% if perms.management.change_store %}
+            
+                <a href="{% url 'sale_view' aperture.aper_id %}" class="btn btn-success mt-autofloat-right mr-3 ml-3">view</a>
+              {% else %}
+                <a href="{% url 'aperture_detail' aperture.aper_id %}" class="btn btn-success mt-autofloat-right mr-3 ml-3">view</a>
+              {% endif %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    {% endif %}
+</div>
+{% endblock content %}

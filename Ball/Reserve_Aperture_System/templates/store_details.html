@@ -1,0 +1,55 @@
+{% extends 'nav.html' %}
+{% block sidebar %}
+        <div class="row m-3">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-3 ml-5 p-5 bg-white"><center>
+                        <br><br><br><br>
+                        <h1>{{ store.store_name }}</h1>
+                        <h5>เบอร์โทรร้านค้า : {{ store.phone }}</h5><br><br><br><br>
+                        <a href="{% url 'edit_store' store.store_id %}" class="btn-1 btn-warning btn-lg btn-block">Edit Store details</a><br>
+                        <a href="{% url 'remove_store' store.store_id %}" class="btn-3 btn-warning btn-lg btn-block">Remove store</a>
+                    </div>
+                    </center>
+                    <div class="col-8 p-5 ml-5  bg-white">
+                        <center>
+                        <img class=" aperture rounded img-fluid " style="height: 30rem; width: 60rem;" src="{{ store.store_pic.url }}">
+                        <br><br><br>
+                        <h4>ข้อมูลร้านค้า {{ store.store_name }}</h4>
+                        <br>
+                        <table class="table table-striped bg-light text-center mb-2">
+                            <thead>
+                                <tr>
+                                  <th scope="col" style="width: 100px;">รหัสร้านค้า</th>
+                                  <th scope="col" style="width: 90px;">ชื่อบริษัท</th>
+                                  <th scope="col" style="width: 90px;">หมายเหตุ</th>
+                                  <th scope="col" style="width: 90px;">ชื่อผู้จัดการร้าน</th>
+                                  <th scope="col" style="width: 90px;">สาขา</th>
+                                  <th scope="col" style="width: 90px;">ค่าใช้จ่ายทั้งหมด</th>
+                                  <th scope="col" style="width: 120px;">รายการซ่อมแซม</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <td>{{ store.store_id }}</td>
+                                <td>{{ store.company_company_id.company_name }}</td>
+                                <td> {{ store.manage_manag_id.manag_fname }} {{ store.manage_manag_id.manag_lname }}</td>
+                                <td>{{ store.other_notes }}</td>
+                                <td>{{ store.branch }}</td>
+                                <td>{% if cost_total %}
+                                    {{ cost_total }}
+                                {% else %}
+                                    {{ store.cost_total }}
+                                {% endif %}</td>
+                                
+                                <td>{{ store.repaired }}</td>
+                                
+                            </tbody>
+                        </table>
+                        </center>
+                    </div>
+                </div>
+            </div>
+            
+            
+       
+{% endblock sidebar %}

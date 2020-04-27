@@ -1,0 +1,83 @@
+{% extends "nav.html" %}
+{% load static %}
+{% block sidebar %}
+<div class="container-fluid ml-0 pl-0">
+  <form action="{% url 'edit_expenses' store.store_id %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+  <div class="row mt-5 pb-3">
+    <div class="col">
+      <div class="row">
+        <div class="side-bar col-3 ">
+          <div class="card mt-3  ml-3 bg-light">
+            <div class="card-body">
+              <center>
+
+              <h2>{{ store.store_name }}<br></h2>
+              <h5>ที่ตั้ง : {{ aper.aper_loc }}<br>ราคาที่ : {{ aper.aper_price }} บาท/เดือน</h5>
+              <br>
+              <button class="btn btn-3 btn-lg btn-block" type="submit" id="button-addon2">SAVE</button>
+            </center>
+            </div>
+            <img src="{{ store.store_pic.url }}" class="card-img-bottom h-500px p-2">
+            <div class="row">
+              <div class="col-4">
+              </div>
+              <div class="col-4">
+              </div>
+              <div class="col-4">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card mt-2 ml-5 p-3 bg-light">
+        <div class="col">
+          <div class="row mt-5">
+            <div class="col-sm ">
+              <table class="table table-striped bg-light text-center">
+                <tbody>
+                  <tr>
+                    <th scope="row" style="width: 1100px;">ค่าไฟ</th>
+                    <td>{{ form.electric_bill }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">ค่าน้ำ</th>
+                    <td>{{ form.water_bill }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">ค่าเช่าพื้นที่</th>
+                    <td readonly>{{ form.rent_fee }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">ค่าซ่อมเเซม</th>
+                    <td>{{ form.repair_fee }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">ค่าประกัน</th>
+                    <td>{{ form.insurance_fee }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">ค่าใช้จ่ายอื่นๆ</th>
+                    <td>{{ form.other_fee }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">ชื่อพนักงานฝ่ายบัญชี</th>
+                    <td>{{ form.accountant_employee_emp_id }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">ชื่อร้านค้า</th>
+                    <td>{{ form.store_store_id }}</td>
+                  </tr>
+                </tbody>
+              </table>
+              
+            </div>
+
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>
+{% endblock sidebar %}

@@ -1,0 +1,63 @@
+{% extends "nav.html" %}
+{% load static %}
+{% block sidebar %}
+
+<div class="row m-3">
+    <div class="col-12">
+        <div class="row">
+            <div class="col-3 ml-5 p-5 bg-white"><center>
+                <br><br><br><br><br><br><br><br><br><br>
+                <h1>{{ store.store_name }}</h1>
+                <h5>เบอร์โทรร้านค้า : {{ store.phone }}</h5><br><br><br><br>
+                <a href="{% url 'index' %}"><button type="button" class="btn btn-1 btn-lg btn-block">Back</button></a>
+                
+            </div>
+            </center>
+            <div class="col-8 p-5 ml-5  bg-white">
+                <center>
+                <img class=" aperture rounded img-fluid " style="height: 30rem; width: 60rem;" src="{{ store.store_pic.url }}">
+                <br><br><br>
+                <h4>ข้อมูลร้านค้า {{ store.store_name }}</h4>
+                <br>
+                <table class="table table-striped bg-light text-center mb-2">
+                    <thead>
+                        <tr>
+                          <th scope="col" style="width: 100px;">รหัสร้านค้า</th>
+                          <th scope="col" style="width: 100px;">ชื่อบริษัท</th>
+                          <th scope="col" style="width: 150px;">ชื่อผู้จัดการร้าน</th>
+                          <th scope="col" style="width: 100px;">ชื่อสาขาร้าน</th>
+                          
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <td>{{ store.store_id }}</td>
+                        <td>{{ store.manage_manag_id.manag_fname }} {{ store.manage_manag_id.manag_lname }}</td>
+                        <td>{{ store.company_company_id.company_name }}</td>
+                        <td>{{ store.branch }}</td>
+                        
+                        
+                    </tbody>
+                </table>
+                </center>
+            </div>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-4">
+        </div>
+        <div class="col-4">
+        </div>
+        <div class="col-4">
+            {% if cost != None and store.company_company_id.account_acc_id.id == request.user.id %}
+                <a href="{% url 'expenses_details' store.store_id %}" class="btn btn-outline-light w-25">View Expenses and Bill</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock sidebar %}
+
+
+
+
+    
+    
