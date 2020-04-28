@@ -25,8 +25,9 @@
                                   <th scope="col" style="width: 90px;">หมายเหตุ</th>
                                   <th scope="col" style="width: 90px;">ชื่อผู้จัดการร้าน</th>
                                   <th scope="col" style="width: 90px;">สาขา</th>
-                                  <th scope="col" style="width: 90px;">ค่าใช้จ่ายทั้งหมด</th>
                                   <th scope="col" style="width: 120px;">รายการซ่อมแซม</th>
+                                  <th scope="col" style="width: 90px;">ค่าใช้จ่ายทั้งหมด</th>
+                                  
                                 </tr>
                             </thead>
                             <tbody>
@@ -35,13 +36,14 @@
                                 <td>{{ store.other_notes }}</td>
                                 <td> {{ store.manage_manag_id.manag_fname }} {{ store.manage_manag_id.manag_lname }}</td>
                                 <td>{{ store.branch }}</td>
-                                <td>{% if cost_total %}
+                                <td>{{ store.repaired }}</td>
+                                <td><h4>{% if cost_total %}
                                     {{ cost_total }} บาท
                                 {% else %}
                                     {{ store.cost_total }} บาท
-                                {% endif %}</td>
+                                {% endif %}</h4></td>
                                 
-                                <td>{{ store.repaired }}</td>
+                                
                                 
                             </tbody>
                         </table>

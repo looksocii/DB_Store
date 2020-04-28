@@ -80,7 +80,7 @@ class Manager(models.Model): # ข้อมูลผู้จัดการร�
     manag_id = models.AutoField(primary_key=True, validators=[MaxValueValidator(10)]) #กำหนดให้ใส่ได้แค่ 10 หลัก
     manag_fname = models.CharField(max_length=255)
     manag_lname = models.CharField(max_length=255)
-    manag_level = models.CharField(max_length=2) #กำหนดให้ใส่ได้แค่ 10 หลัก
+    manag_level = models.CharField(max_length=255) #กำหนดให้ใส่ได้แค่ 10 หลัก
     manag_phone = models.CharField(max_length=10, unique=True)
 
     def __str__(self):

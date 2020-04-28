@@ -114,7 +114,8 @@ def my_register(request):
 def store_detail(request, store_id):
     store = Store.objects.get(pk=store_id)
     try:
-        cost = Cost.objects.get(store_store_id=store_id)
+        
+        cost = Cost.objects.filter(store_store_id=store_id)
     except ObjectDoesNotExist:
         cost = None
     return render(request, 'store.html', {
@@ -147,6 +148,27 @@ def add_manager(request, aperture_id):
     return render(request, 'manager.html', {
         'aperture_id': aperture_id
     })
+@login_required
+def change_pass(request):
+    if request.method == 'POST':
+        user = request.user
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+        # ---------------------- เช็คว่ารหัสผ่านตรงกันไหม ------------------
+        if password1 == password2:
+            u = User.objects.get(username=user)
+            u.set_password(password1)
+            u.save()
+            return redirect('login')
+        else:
+            context = {
+                'password1': password1,
+                'password2': password2,
+                'error': "กรุณากรอกรหัสผ่านให้ตรงกัน"
+            }
+            return render(request, 'change_password.html', context)
+        # -------------------------------------------------------------
+    return render(request, 'change_password.html')
 
 def store_detail_edit(request, store_id):
     context = dict()
@@ -175,6 +197,7 @@ def remove_store(request, store_id):
         aper = Aperture.objects.get(store_store_id=store_id)
         aper.aper_status = False
         aper.store_store_id = None
+        aper.issue_date = datetime.now()
         aper.save()
         store.delete()
         return redirect('index')
@@ -212,7 +235,12 @@ def add_expenses(request, store_id):
         'aper': aper,
         'add': 'add'
     })
-#--------------------------------------------- FORM -------------------------------------------------
+
+
+
+
+
+#------------------------------------------------------ FORM ----------------------------------------------------------
 
 def edit_store(request, store_id):
     store = Store.objects.get(store_id=store_id)
@@ -224,10 +252,12 @@ def edit_store(request, store_id):
         'form': form,
         'store': store
     })
+ #or none ไม่มีการส่งรีเควส เช่นกด edit มาครั้งแรกจะเข้า none พอแก้ไข กดเซฟแล้วจะเข้า request 
+
 
 def add_store(request, aper_id):
     aper = Aperture.objects.get(pk=aper_id)
-    if request.method == 'POST':
+    if request.method == 'POST':     #กด submit
         form = StoreForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
@@ -240,6 +270,8 @@ def add_store(request, aper_id):
         'form': form,
         'aper_id': aper_id
     })
+
+
 
 def add_expenses(request, store_id):
     store = Store.objects.get(pk=store_id)
@@ -258,11 +290,12 @@ def add_expenses(request, store_id):
         'add': 'add'
     })
 
+
 def edit_expenses(request, store_id):
     store = Store.objects.get(pk=store_id)
     aper = Aperture.objects.get(store_store_id=store_id)
     try:
-        instance = Cost.objects.get(store_store_id=store_id)
+        instance = Cost.objects.filter(store_store_id=store_id).latest('cost_id')
     except ObjectDoesNotExist:
         instance = None
 
@@ -275,3 +308,4 @@ def edit_expenses(request, store_id):
         'store': store,
         'aper': aper
     })
+#------------------------------------------------------- FORM ----------------------------------------------------------

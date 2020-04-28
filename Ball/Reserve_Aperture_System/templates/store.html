@@ -29,6 +29,7 @@
                         <tr>
                           <th scope="col" style="width: 100px;">รหัสร้านค้า</th>
                           <th scope="col" style="width: 100px;">ชื่อบริษัท</th>
+                          <th scope="col" style="width: 90px;">หมายเหตุ</th>
                           <th scope="col" style="width: 150px;">ชื่อผู้จัดการร้าน</th>
                           <th scope="col" style="width: 100px;">ชื่อสาขาร้าน</th>
                           
@@ -37,6 +38,7 @@
                     <tbody>
                         <td>{{ store.store_id }}</td>
                         <td>{{ store.company_company_id.company_name }}</td>
+                        <td>{{ store.other_notes }}</td>
                         <td>{{ store.manage_manag_id.manag_fname }} {{ store.manage_manag_id.manag_lname }}</td>
                         <td>{{ store.branch }}</td>
                         
