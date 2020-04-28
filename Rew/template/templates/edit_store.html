@@ -1,5 +1,6 @@
 {% extends 'nav.html' %}
 {% block sidebar %}
+
 <script type="text/javascript">
     function readURL(input) {
         if (input.files && input.files[0]) {
@@ -11,13 +12,13 @@
         }
     }
 </script>
-<div class="row-2 m-3">
+<div class="row-2 m-3 mt-5">
     <form action="{% url 'edit_store' store.store_id %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="col-12">
         <div class="row">
             <div class="col-7 p-7">
-                <table class="table table-striped bg-ligh" >
+                <table class="table table-striped bg-light" >
                     <thead>
                         <tr>
                             <th colspan="2" >
@@ -40,7 +41,7 @@
                         </tr>
                         <tr align="center">
                             <td>ค่าใช้จ่ายทั้งหมด</td>
-                            <td>{{ form.cost_total }}</td>
+                            <td>{{ form.cost_total }} บาท</td>
                         </tr>
                         <tr align="center">
                             <td>รายการที่ซ่อมแซม</td>
@@ -68,18 +69,20 @@
 
             </div>
             <div class="col-4 p-5 ml-5 bg-light">
-                <div class="bg-white">
-                    <img id="blah" width="400px" src="{{ store.store_pic.url }}">
+                <div class=""><center>
+                    <br> <br> 
+                    <img id="blah" width="520px" src="{{ store.store_pic.url }}">
+                </center>
                 </div>
                 <br>
                 <center>
                     <br>
-                    <h4>You want to save details?</h4>
+                    <h4>You want to save this details?</h4>
                     {{ form.errors }}
                 </center>
                 <br>
                 <button type="submit" class="btn btn-3 btn-lg btn-block">Save</button><br>
-                <a href="{% url 'index' %}"><button type="button" class="btn btn-4 btn-lg btn-block">Back</button></a>
+                <a href="{% url 'index' %}"><button type="button" class="btn btn-1 btn-lg btn-block">Back</button></a>
             </div>
         </div>
     </div>

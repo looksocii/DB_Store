@@ -3,7 +3,9 @@
 {% block sidebar %}
 <form action="{% url 'add_manager' aperture_id %}" method="POST">
     {% csrf_token %}
-    <div class="container text-center">
+    <br><br><br>
+    <div class="container text-center bg-white shadow rounded mt-5">
+        <br>
         <h1 class="mt-5">Complete your manager information</h1>
         <h5 class="mt-5">ข้อมูลผู้จัดการร้านค้า</h5>
         <div class="row form">
@@ -39,5 +41,6 @@
             </div>
         </div>
         <button class="btn btn-outline-light w-25 mb-4" type="submit">Confirm</button>
+        <br><br><br>
 </form>
 {% endblock sidebar %}

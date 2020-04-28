@@ -1,6 +1,7 @@
 {% extends "nav.html" %}
 {% load static %}
 {% block sidebar %}
+
     <div class="container-fluid ml-0 pl-0">
       <div class="row mt-5 pt-5">
             <div class="col">
@@ -8,47 +9,51 @@
                     <div class="side-bar col-3 ">
                       <div class="card mt-3 w-100 ml-3  bg-light">
                             <div class="card-body">
-                                <h5 class="navbar-brand text-light">{{ store.store_name }}<br>ที่ตั้ง : {{ aper.aper_loc }}<br>ราคาที่ : {{ aper.aper_price }} บาท/เดือน</h5>
+                              <center>
+                              <h2>{{ store.store_name }}<br></h2>
+                                <h5 class="navbar-brand">ที่ตั้ง : {{ aper.aper_loc }}<br>ราคาที่ : {{ aper.aper_price }} บาท/เดือน</h5>
+                              </center>
                                 {% if perms.management.change_cost %}
                                   <a href="{% url 'edit_expenses' store.store_id %}" class="text-decoration-none"><button class="btn btn-4 btn-block btn-outline-light" type="submit">Edit expenses and bills</button></a>
                                 {% endif %}
                             </div>
-                        <img src="{{ store.store_pic.url }}" class="card-img-bottom h-500px">
+                        <img src="{{ store.store_pic.url }}" class="card-img-bottom h-500px p-2">
+                     
                         </div>
                     </div>
-
+                    <div class="card mt-2 ml-5 p-3 bg-light">
                     <div class="col mt-5">
                         <div class="row mt-5">
                           <div class="col-sm ">
                             <table class="table table-striped bg-light">
                                 <tbody>
                                   <tr>
-                                    <th scope="row">วันที่สร้างบิล</th>
+                                    <th scope="row" style="width: 1200px;"">วันที่สร้างบิล</th>
                                     <td>{{ cost.date }}</td>
                                   </tr>
                                   <tr>
                                     <th scope="row">ค่าไฟ</th>
-                                    <td>{{ cost.electric_bill }}</td>
+                                    <td>{{ cost.electric_bill }} บาท</td>
                                   </tr>
                                   <tr>
                                     <th scope="row">ค่าน้ำ</th>
-                                    <td>{{ cost.water_bill }}</td>
+                                    <td>{{ cost.water_bill }} บาท</td>
                                   </tr>
                                   <tr>
                                     <th scope="row">ค่าเช่าพื้นที่</th>
-                                    <td>{{ cost.rent_fee }}</td>
+                                    <td>{{ cost.rent_fee }} บาท</td>
                                   </tr>
                                   <tr>
                                     <th scope="row">ค่าซ่อมเเซม</th>
-                                    <td>{{ cost.repair_fee }}</td>
+                                    <td>{{ cost.repair_fee }} บาท</td>
                                   </tr>
                                   <tr>
                                     <th scope="row">ค่าประกัน</th>
-                                    <td>{{ cost.insurance_fee }}</td>
+                                    <td>{{ cost.insurance_fee }} บาท</td>
                                   </tr>
                                   <tr>
                                     <th scope="row">ค่าใช้จ่ายอื่นๆ</th>
-                                    <td>{{ cost.other_fee }}</td>
+                                    <td>{{ cost.other_fee }} บาท</td>
                                   </tr>
                                   <tr>
                                     <th scope="row">รวมค่าใช้จ่ายทั้งหมด</th>
@@ -60,7 +65,9 @@
                     </div>
 
                 </div>
+                </div>
             </div>
         </div>   <!-- main row  -->
     </div> <!--container-->
+ 
 {% endblock sidebar %}

@@ -1,15 +1,21 @@
 {% extends "nav.html" %}
 {% load static %}
 {% block sidebar %}
-<div class="container mt-5 pt-5">
-    <div class="row mt-5 bg-light rounded-lg">
-        <div class="col-5 p-3">
+
+<div class="container mt-5">
+    <br><br><br><br><br><br>
+    <div class="row mt-5 bg-light rounded-lg shadow rounded">
+        <br>
+        <div class="col-5 p-3 ">
+            <br><br>
             <img class="aperture rounded img-fluid" src="{{ aperture.aper_pic.url }}">
         </div>
         <div class="col-7 mt-3">
             <div class="row form">
                 <div class="form-group col-3">
+                    <br><br>
                     <div class="row justify-content-end mr-5 mb-3">
+                        
                         <label for="inputPassword" class="input">รหัสห้องว่าง</label>
                     </div>
                     <div class="row justify-content-end mr-5 mb-3">
@@ -19,19 +25,22 @@
                         <label for="inputPassword" class="input">ที่ตั้ง</label>
                     </div>
                 </div>
-                <div class="form-group col-3 ml-auto">
-                    <div class="row mb-3">
+                <div class="form-group col-3">
+                    <br><br>
+                    <div class="row mb-2">
                         <p class="text-muted">{{ aperture.aper_id }}</p>
                     </div>
-                    <div class="row mb-3">
+                    <div class="row mb-2">
                         <p class="text-muted">{{ aperture.aper_area }} ตารางเมตร</p>
                     </div>
-                    <div class="row mb-3">
+                    <div class="row ">
                         <p class="text-muted">{{ aperture.aper_loc }}</p>
                     </div>
                 </div>
                 <div class="form-group col-3">
+                    <br><br>
                     <div class="row justify-content-end mr-5 mb-3">
+                        
                         <label for="inputPassword" class="input">วันที่ออกสัญญา</label>
                     </div>
                     <div class="row justify-content-end mr-5 mb-3">
@@ -39,10 +48,12 @@
                     </div>
                 </div>
                 <div class="form-group col-3 ml-auto">
-                    <div class="row mb-3">
+                    <br><br>
+                    <div class="row mb-2">
+                        
                         <p class="text-muted">{{ aperture.issue_date }}</p>
                     </div>
-                    <div class="row mb-3">
+                    <div class="row mb-1">
                         <p class="text-muted">{{ aperture.aper_price }} บาท/เดือน</p>
                     </div>
                 </div>
@@ -50,9 +61,10 @@
             <div class="row">
                 <div class="col-12">
                     <a href="{% url 'add_manager' aperture.aper_id %}"><button type="button"
-                            class="btn btn-5 btn-light btn-lg btn-block">Booking Now</button></a>
+                            class="btn-1 btn-light btn-lg btn-block">Booking Now</button></a>
                 </div>
             </div>
+            <br><br><br><br>
         </div>
     </div>
 </div>

@@ -1,7 +1,8 @@
 {% extends 'nav.html' %}
 {% block sidebar %}
+<br>
 <div class="wrapper " align ="center" style="margin-top:10%">
-    <div class="col-4 p-5 ml-5 bg-dark text-white">
+    <div class="col-4 p-5 ml-5 bg-white shadow rounded">
         <div class="bg-white text-white">
         </div>
         <br>
@@ -11,10 +12,10 @@
         <br>
         <form action="{% url 'remove_store' store_id %}" method="POST">
         {% csrf_token %}
-        <button type="submit" class="btn btn-warning btn-lg btn-block">Yes</button>
+        <button type="submit" class="btn-1 btn-warning btn-lg btn-block">Yes</button>
         </form>
         <br>
-        <a href="{% url 'index' %}" class="btn btn-warning btn-lg btn-block">No</a>
+        <a href="{% url 'index' %}" class="btn-4 btn-warning btn-lg btn-block">No</a>
         <br>
     </div>
   </div>
