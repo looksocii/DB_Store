@@ -9,7 +9,12 @@
                 <br><br><br><br><br><br><br><br><br><br>
                 <h1>{{ store.store_name }}</h1>
                 <h5>เบอร์โทรร้านค้า : {{ store.phone }}</h5><br><br><br><br>
+                {% if cost != None and store.company_company_id.account_acc_id.id == request.user.id %}
+                <a href="{% url 'expenses_details' store.store_id %}" class="btn btn-4 btn-lg btn-block">View Expenses and Bill</a><br>
+                {% endif %}
                 <a href="{% url 'index' %}"><button type="button" class="btn btn-1 btn-lg btn-block">Back</button></a>
+
+                
                 
             </div>
             </center>
@@ -48,9 +53,7 @@
         <div class="col-4">
         </div>
         <div class="col-4">
-            {% if cost != None and store.company_company_id.account_acc_id.id == request.user.id %}
-                <a href="{% url 'expenses_details' store.store_id %}" class="btn btn-outline-light w-25">View Expenses and Bill</a>
-            {% endif %}
+            
         </div>
     </div>
 </div>

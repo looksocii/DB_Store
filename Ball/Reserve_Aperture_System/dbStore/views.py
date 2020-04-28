@@ -148,17 +148,6 @@ def add_manager(request, aperture_id):
         'aperture_id': aperture_id
     })
 
-def edit_store(request, store_id):
-    store = Store.objects.get(store_id=store_id)
-    form = StoreForm(request.POST or None, request.FILES or None, instance=store)
-    if form.is_valid():
-        form.save()
-        return redirect('index')
-    return render(request, 'edit_store.html', {
-        'form': form,
-        'store': store
-    })
-
 def store_detail_edit(request, store_id):
     context = dict()
     store = Store.objects.get(pk=store_id)
@@ -180,6 +169,47 @@ def sale_view(request, aper_id):
         'aper': aper
     })
 
+def remove_store(request, store_id):
+    if request.method == 'POST':
+        store = Store.objects.get(pk=store_id)
+        aper = Aperture.objects.get(store_store_id=store_id)
+        aper.aper_status = False
+        aper.store_store_id = None
+        aper.save()
+        store.delete()
+        return redirect('index')
+        
+    return render(request, 'question.html', {
+        'store_id': store_id
+    })
+
+
+def expenses_details(request, store_id):
+    store = Store.objects.get(pk=store_id)
+    aper = Aperture.objects.get(store_store_id=store_id)
+    cost = Cost.objects.filter(store_store_id=store_id).latest('cost_id')
+    cost_total = cost.electric_bill+cost.water_bill+cost.rent_fee+cost.repair_fee+cost.insurance_fee+cost.other_fee
+    return render(request, 'add_expenses.html', {
+        'store': store,
+        'aper': aper,
+        'cost': cost,
+        'cost_total': cost_total
+    })
+
+
+#--------------------------------------------- FORM -------------------------------------------------
+
+def edit_store(request, store_id):
+    store = Store.objects.get(store_id=store_id)
+    form = StoreForm(request.POST or None, request.FILES or None, instance=store)
+    if form.is_valid():
+        form.save()
+        return redirect('index')
+    return render(request, 'edit_store.html', {
+        'form': form,
+        'store': store
+    })
+
 def add_store(request, aper_id):
     aper = Aperture.objects.get(pk=aper_id)
     if request.method == 'POST':
@@ -194,20 +224,6 @@ def add_store(request, aper_id):
     return render(request, 'add_store.html', {
         'form': form,
         'aper_id': aper_id
-    })
-
-def remove_store(request, store_id):
-    if request.method == 'POST':
-        store = Store.objects.get(pk=store_id)
-        aper = Aperture.objects.get(store_store_id=store_id)
-        aper.aper_status = False
-        aper.store_store_id = None
-        aper.save()
-        store.delete()
-        return redirect('index')
-        
-    return render(request, 'question.html', {
-        'store_id': store_id
     })
 
 def add_expenses(request, store_id):
@@ -244,15 +260,4 @@ def edit_expenses(request, store_id):
         'store': store,
         'aper': aper
     })
-
-def expenses_details(request, store_id):
-    store = Store.objects.get(pk=store_id)
-    aper = Aperture.objects.get(store_store_id=store_id)
-    cost = Cost.objects.filter(store_store_id=store_id).latest('cost_id')
-    cost_total = cost.electric_bill+cost.water_bill+cost.rent_fee+cost.repair_fee+cost.insurance_fee+cost.other_fee
-    return render(request, 'add_expenses.html', {
-        'store': store,
-        'aper': aper,
-        'cost': cost,
-        'cost_total': cost_total
-    })
+#--------------------------------------------- FORM -------------------------------------------------
