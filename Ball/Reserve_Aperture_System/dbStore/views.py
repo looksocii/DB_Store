@@ -63,6 +63,9 @@ def my_logout(request):
     logout(request)
     return redirect('login')
 
+def change_password(request):
+    return render(request, 'change_password.html')
+
 def my_register(request):
     if request.method == 'POST':
         username = request.POST.get('username')
