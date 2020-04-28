@@ -11,13 +11,15 @@
 </head>
 
 <body>
-    <div class="row row-background">
-        <script>
-            for (var i = 0; i <= 101; i++) {
-                document.write("<div class='col-2 background'></div>");
-            }
-        </script>
-    </div>
+    <style>
+        body {
+            background-image: url("{% static 'back.jpg' %}");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+
     <nav class="navbar color">
         <div class="w-20"></div>
         <div class="w-20"></div>
@@ -33,7 +35,7 @@
         {% endif %}
         <form class="form-inline my-2 my-lg-0">
             {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}"><button class="btn btn-2 mr-3 btn-outline-light" type="button">Log
+            <a href="{% url 'logout' %}"><button class="btn btn-4 mr-3 btn-outline-light" type="button">Log
                     out</button></a>
             {% else %}
             <a href="{% url 'register' %}"><button class="btn btn-1 mr-3 btn-outline-light" type="button">Sign
@@ -56,5 +58,110 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    var parent = document.getElementById("clone")
+    var child = parent.cloneNode(parent)
+    function requestStore() {
+        axios.post('/storeApi/', {
+            search: document.getElementById('search').value
+        })
+            .then(function (respnose) {
+                if (respnose.data.output == "null") {
+                    var list = document.getElementById("parent")
+                    while (list.hasChildNodes()) {
+                        list.removeChild(list.firstChild);
+                    }
+                } else {
+                    var list = document.getElementById("parent")
+                    while (list.hasChildNodes()) {
+                        list.removeChild(list.firstChild);
+                    }
+                    i = 0
+                    for (x of respnose.data.output) {
+                        document.getElementById("parent").appendChild(child)
+                        document.getElementById("image").src = "/media/" + x.store_pic;
+                        document.getElementById("name").innerHTML = x.store_name;
+                        document.getElementById("phone").innerHTML = "Phone : " + x.phone;
+                        document.getElementById("other").innerHTML = x.other_notes;
+                        if (i != 0) {
+                            if (document.getElementsByClassName("check")[i - 1].id == "expenses") {
+                                document.getElementsByClassName("check")[i - 1].href = "/expenses_details/" + x.store_id + "/";
+                            } else if (document.getElementsByClassName("check")[i - 1].id == "edit") {
+                                document.getElementsByClassName("check")[i - 1].href = "/edit_expenses/" + x.store_id + "/";
+                            } else if (document.getElementsByClassName("check")[i - 1].id == "store") {
+                                document.getElementsByClassName("check")[i - 1].href = "/store_detail_edit/" + x.store_id + "/";
+                            } else if (document.getElementsByClassName("check")[i - 1].id == "detail") {
+                                document.getElementsByClassName("check")[i - 1].href = "/store_detail/" + x.store_id + "/";
+                            }
+                        } else {
+                            if (document.getElementsByClassName("check")[i].id == "expenses") {
+                                document.getElementsByClassName("check")[i].href = "/expenses_details/" + x.store_id + "/";
+                            } else if (document.getElementsByClassName("check")[i].id == "edit") {
+                                document.getElementsByClassName("check")[i].href = "/edit_expenses/" + x.store_id + "/";
+                            } else if (document.getElementsByClassName("check")[i].id == "store") {
+                                document.getElementsByClassName("check")[i].href = "/store_detail_edit/" + x.store_id + "/";
+                            } else if (document.getElementsByClassName("check")[i].id == "detail") {
+                                document.getElementsByClassName("check")[i].href = "/store_detail/" + x.store_id + "/";
+                            }
+                        }
+                        child = child.cloneNode(child)
+                        i++
+                    }
+                }
+            })
+            .catch(function (error) {
+                console.log(error)
+            })
+    }
+
+    function requestAperture() {
+        axios.post('/apertureApi/', {
+            search: document.getElementById('search').value
+        })
+            .then(function (respnose) {
+                if (respnose.data.output == "null") {
+                    var list = document.getElementById("parent")
+                    while (list.hasChildNodes()) {
+                        list.removeChild(list.firstChild);
+                    }
+                } else {
+                    var list = document.getElementById("parent")
+                    while (list.hasChildNodes()) {
+                        list.removeChild(list.firstChild);
+                    }
+                    i = 0
+                    for (x of respnose.data.output) {
+                        document.getElementById("parent").appendChild(child)
+                        if (i != 0) {
+                            if (document.getElementsByClassName("check")[i - 1].id == "add") {
+                                document.getElementsByClassName("check")[i - 1].href = "/add_store/" + x.aper_id + "/";
+                            } else if (document.getElementsByClassName("check")[i - 1].id == "sale") {
+                                document.getElementsByClassName("check")[i - 1].href = "/sale_view/" + x.aper_id + "/";
+                            } else if (document.getElementsByClassName("check")[i - 1].id == "aperture") {
+                                document.getElementsByClassName("check")[i - 1].href = "/aperture_detail/" + x.aper_id + "/";
+                            }
+                        } else {
+                            if (document.getElementsByClassName("check")[i].id == "add") {
+                                document.getElementsByClassName("check")[i].href = "/add_store/" + x.aper_id + "/";
+                            } else if (document.getElementsByClassName("check")[i].id == "sale") {
+                                document.getElementsByClassName("check")[i].href = "/sale_view/" + x.aper_id + "/";
+                            } else if (document.getElementsByClassName("check")[i].id == "aperture") {
+                                document.getElementsByClassName("check")[i].href = "/aperture_detail/" + x.aper_id + "/";
+                            }
+                        }
+                        child = child.cloneNode(child)
+                        document.getElementById("image").src = "/media/" + x.aper_pic;
+                        document.getElementById("name").innerHTML = x.aper_loc;
+                        document.getElementById("price").innerHTML = "Price:" + x.aper_price + "Baht";
+                        i++
+                    }
+                }
+            })
+            .catch(function (error) {
+                console.log(error)
+            })
+    }
+</script>
 
 </html>

@@ -2,6 +2,7 @@
 {% block sidebar %}
 {% load static %}
     <div class="container">
+        <br><br><br><br><br><br><br><br>
         <div class="row bg-white mt-5">
             <div class="col-5 text-center p-1">
                 <img src="{% static 'logo.png' %}">
@@ -10,6 +11,7 @@
                 <form action="{% url 'login' %}" method="POST">
                     {% csrf_token %}
                     <div class="form-group">
+                        <br>
                         <label for="exampleInputEmail1">Username ( ชื่อผู้ใช้ )</label>
                         <input type="text" class="form-control" id="exampleInputEmail1" placeholder="ชื่อผู้ใช้" name="username"
                         {% if error %}
@@ -34,8 +36,8 @@
                             <small class="form-text text-muted text-center" style="margin-bottom: 4;">ตรวจสอบอีเมลหรือชื่อผู้ใช้ และ รหัสผ่านให้ถูกต้องก่อนเข้าสู่ระบบ</small>
                         {% endif %}
                     {% comment %} ---------------------------------------------------------------------------------------------------------------- {% endcomment %}
-
-                    <button type="submit" class="btn btn-5 btn-lg btn-block">Login</button>
+                    <br>
+                    <button type="submit" class="btn btn-3 btn-lg btn-block">Login</button>
                 </form>
             </div>
         </div>
