@@ -19,6 +19,7 @@ urlpatterns = [
     path('edit_expenses/<int:store_id>/', views.edit_expenses, name='edit_expenses'),
     path('expenses_details/<int:store_id>/', views.expenses_details, name='expenses_details'),
     path('change_password/', views.change_password, name='change_password'),
+    path('add_expenses/<int:store_id>/', views.add_expenses, name='add_expenses'),
 ]
 
 if settings.DEBUG:

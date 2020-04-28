@@ -196,7 +196,22 @@ def expenses_details(request, store_id):
         'cost_total': cost_total
     })
 
-
+def add_expenses(request, store_id):
+    store = Store.objects.get(pk=store_id)
+    aper = Aperture.objects.get(store_store_id=store_id)
+    if request.method == 'POST':
+        form = CostForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = CostForm()
+    return render(request, 'edit_expenses.html', {
+        'form': form,
+        'store': store,
+        'aper': aper,
+        'add': 'add'
+    })
 #--------------------------------------------- FORM -------------------------------------------------
 
 def edit_store(request, store_id):
@@ -260,4 +275,3 @@ def edit_expenses(request, store_id):
         'store': store,
         'aper': aper
     })
-#--------------------------------------------- FORM -------------------------------------------------
