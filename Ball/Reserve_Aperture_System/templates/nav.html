@@ -11,13 +11,15 @@
 </head>
 
 <body>
-    <div class="row row-background">
-        <script>
-            for (var i = 0; i <= 101; i++) {
-                document.write("<div class='col-2 background'></div>");
-            }
-        </script>
-    </div>
+    <style>
+        body{
+            background-image: url("{% static 'back.jpg' %}");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+    
     <nav class="navbar color">
         <div class="w-20"></div>
         <div class="w-20"></div>
