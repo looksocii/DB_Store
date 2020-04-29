@@ -2,7 +2,11 @@
 {% load static %}
 {% block sidebar %}
 <div class="container-fluid ml-0 pl-0">
+  {% if add %}
+  <form action="{% url 'add_expenses' store.store_id %}" method="POST" enctype="multipart/form-data">
+  {% else %}
   <form action="{% url 'edit_expenses' store.store_id %}" method="POST" enctype="multipart/form-data">
+  {% endif %}
     {% csrf_token %}
   <div class="row mt-5 pb-3">
     <div class="col">

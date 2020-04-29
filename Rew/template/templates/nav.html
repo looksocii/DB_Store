@@ -12,14 +12,14 @@
 
 <body>
     <style>
-        body {
+        body{
             background-image: url("{% static 'back.jpg' %}");
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
         }
     </style>
-
+    
     <nav class="navbar color">
         <div class="w-20"></div>
         <div class="w-20"></div>
@@ -35,8 +35,11 @@
         {% endif %}
         <form class="form-inline my-2 my-lg-0">
             {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}"><button class="btn btn-4 mr-3 btn-outline-light" type="button">Log
-                    out</button></a>
+            
+            <a href="{% url 'change_password' %}"><button class="btn btn-1 mr-3 btn-outline-light" type="button">Change Password
+                    </button></a>
+                    <a href="{% url 'logout' %}"><button class="btn btn-4 mr-3 btn-outline-light" type="button">Log
+                        out</button></a>
             {% else %}
             <a href="{% url 'register' %}"><button class="btn btn-1 mr-3 btn-outline-light" type="button">Sign
                     Up</button></a>

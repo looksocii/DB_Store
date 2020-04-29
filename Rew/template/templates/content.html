@@ -7,11 +7,11 @@
     {% for store in stores %}
     <div class="col-3 p-4" id="clone">
       <div class="card shadow rounded" style="width: 18rem; height: 23rem;">
-        <img src="{{ store.store_pic.url }}" class="card-img-top image" alt="Card imagecap" style="height: 10rem;" >
+        <img src="{{ store.store_pic.url }}" class="card-img-top image" alt="Card imagecap" style="height: 10rem;">
         <div class="card-body d-flex flex-column">
-          <p class="card-title text-center h4 name" >{{ store.store_name }}</p>
-          <p class="card-title text-center h6 font-weight-bolder text-muted phone" >Phone : {{ store.phone }}</p>
-          <p class="card-title text-center h6 font-weight-bolder text-muted other" >{{ store.other_notes }}</p>
+          <p class="card-title text-center h4 name">{{ store.store_name }}</p>
+          <p class="card-title text-center h6 font-weight-bolder text-muted phone">Phone : {{ store.phone }}</p>
+          <p class="card-title text-center h6 font-weight-bolder text-muted other">{{ store.other_notes }}</p>
           
           
         </div>
@@ -20,7 +20,7 @@
             {% for c in cost %}
               {% if c.0 == store.store_id %}
                 {% if c.1 > 0 %}
-                <a href="{% url 'expenses_details' store.store_id %}" class="btn btn-success mt-autofloat-right mr-3 ml-3  check" id="expenses">View Expenses and Bill</a>
+                <a href="{% url 'expenses_details' store.store_id %}" class="btn btn-success mt-autofloat-right mr-3 ml-3 check" id="expenses">View Expenses and Bill</a>
                 <br>
                 {% else %}
                 <a href="{% url 'edit_expenses' store.store_id %}" class="btn btn-success mt-autofloat-right mr-3 ml-3 check" id="edit">Add Expenses and Bill</a>
@@ -30,11 +30,11 @@
             {% endfor %}
         {% else %}
           {% if perms.management.change_store %}
-          <a id="store" href="{% url 'store_detail_edit' store.store_id %}" class="btn btn-danger mt-autofloat-right mr-3 ml-3 check">view</a>
+          <a href="{% url 'store_detail_edit' store.store_id %}" class="btn btn-danger mt-autofloat-right mr-3 ml-3 check" id="store">view</a>
           <br>
           {% else %}
           
-            <a id="detail" href="{% url 'store_detail' store.store_id %}" class="btn btn-danger mt-autofloat-right mr-3 ml-3 check">view</a>
+            <a href="{% url 'store_detail' store.store_id %}" class="btn btn-danger mt-autofloat-right mr-3 ml-3 check" id="detail">view</a>
             <br>
           {% endif %}
         {% endif %}
@@ -43,7 +43,7 @@
   {% endfor %}
     {% else %}
     {% for aperture in apertures %}
-      <div class="col-3 p-4 " id="clone">
+      <div class="col-3 p-4" id="clone">
         <div class="card shadow rounded" style="width: 18rem; height: 23rem;">
           <img src="{{ aperture.aper_pic.url }}" class="card-img-top image" alt="Card imagecap" style="height: 10rem;">
         

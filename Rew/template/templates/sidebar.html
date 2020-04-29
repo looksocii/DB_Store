@@ -14,28 +14,28 @@
           <h5>Search Aperture</h5>
           {% endif %}
           <div class="input-group mb-3">
-            <input type="text" id="search" class="form-control" aria-label="Recipient's username"
-              aria-describedby="button-addon2">
+            <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2" id="search">
 
             <div class="input-group-append">
 
               {% if perms.management.add_cost == False %}
               {% if stores.count >= 0 %}
-              <button onclick="requestStore()" class="btn btn-3 btn-outline-light" type="button"
+              <button class="btn btn-3 btn-outline-light" onclick="requestStore()" type="button"
                 id="button-addon2">Search</button>
             </div>
           </div>
           <h5>View Aperture</h5>
           <a href="{% url 'view_aperture' %}" class="text-decoration-none"><button
-              class="btn btn-4 btn-block btn-outline-light" id="button-addon2">Click Here !!!</button></a>
+              class="btn btn-4 btn-block btn-outline-light" id="button-addon2">Cklick Here !!!</button></a>
+
           {% else %}
-          <button onclick="requestAperture()" class="btn btn-3 btn-outline-light" type="button"
+          <button class="btn btn-3 btn-outline-light" onclick="requestAperture()" type="button"
             id="button-addon2">Search</button>
         </div>
       </div>
       <h5>View Store</h5>
       <a href="{% url 'index' %}" class="text-decoration-none"><button class="btn btn-4 btn-block btn-outline-light"
-          id="button-addon2">Click Here !!!</button></a>
+          id="button-addon2">Cklick Here !!!</button></a>
       {% endif %}
       {% endif %}
       <br><br><br>
