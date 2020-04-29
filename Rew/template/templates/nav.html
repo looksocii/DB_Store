@@ -77,35 +77,26 @@
                     while (list.hasChildNodes()) {
                         list.removeChild(list.firstChild);
                     }
-                    i = 0
                     for (x of respnose.data.output) {
                         document.getElementById("parent").appendChild(child)
-                        document.getElementById("image").src = "/media/" + x.store_pic;
-                        document.getElementById("name").innerHTML = x.store_name;
-                        document.getElementById("phone").innerHTML = "Phone : " + x.phone;
-                        document.getElementById("other").innerHTML = x.other_notes;
-                        if (i != 0) {
-                            if (document.getElementsByClassName("check")[i - 1].id == "expenses") {
-                                document.getElementsByClassName("check")[i - 1].href = "/expenses_details/" + x.store_id + "/";
-                            } else if (document.getElementsByClassName("check")[i - 1].id == "edit") {
-                                document.getElementsByClassName("check")[i - 1].href = "/edit_expenses/" + x.store_id + "/";
-                            } else if (document.getElementsByClassName("check")[i - 1].id == "store") {
-                                document.getElementsByClassName("check")[i - 1].href = "/store_detail_edit/" + x.store_id + "/";
-                            } else if (document.getElementsByClassName("check")[i - 1].id == "detail") {
-                                document.getElementsByClassName("check")[i - 1].href = "/store_detail/" + x.store_id + "/";
-                            }
-                        } else {
-                            if (document.getElementsByClassName("check")[i].id == "expenses") {
-                                document.getElementsByClassName("check")[i].href = "/expenses_details/" + x.store_id + "/";
-                            } else if (document.getElementsByClassName("check")[i].id == "edit") {
-                                document.getElementsByClassName("check")[i].href = "/edit_expenses/" + x.store_id + "/";
-                            } else if (document.getElementsByClassName("check")[i].id == "store") {
-                                document.getElementsByClassName("check")[i].href = "/store_detail_edit/" + x.store_id + "/";
-                            } else if (document.getElementsByClassName("check")[i].id == "detail") {
-                                document.getElementsByClassName("check")[i].href = "/store_detail/" + x.store_id + "/";
-                            }
-                        }
                         child = child.cloneNode(child)
+                    }
+                    i = 0
+                    for (x of respnose.data.output) {
+                        document.getElementsByClassName("image")[i].src = "/media/" + x.store_pic;
+                        document.getElementsByClassName("name")[i].innerHTML = x.store_name;
+                        document.getElementsByClassName("phone")[i].innerHTML = "Phone : " + x.phone;
+                        document.getElementsByClassName("other")[i].innerHTML = x.other_notes;
+                        if (document.getElementsByClassName("check")[i].id == "expenses") {
+                            document.getElementsByClassName("check")[i].href = "/expenses_details/" + x.store_id + "/";
+                        } else if (document.getElementsByClassName("check")[i].id == "edit") {
+                            document.getElementsByClassName("check")[i].href = "/edit_expenses/" + x.store_id + "/";
+                        } else if (document.getElementsByClassName("check")[i].id == "store") {
+                            document.getElementsByClassName("check")[i].href = "/store_detail_edit/" + x.store_id + "/";
+                        } else if (document.getElementsByClassName("check")[i].id == "detail") {
+                            document.getElementsByClassName("check")[i].href = "/store_detail/" + x.store_id + "/";
+                        }
+
                         i++
                     }
                 }
@@ -130,30 +121,22 @@
                     while (list.hasChildNodes()) {
                         list.removeChild(list.firstChild);
                     }
-                    i = 0
                     for (x of respnose.data.output) {
                         document.getElementById("parent").appendChild(child)
-                        if (i != 0) {
-                            if (document.getElementsByClassName("check")[i - 1].id == "add") {
-                                document.getElementsByClassName("check")[i - 1].href = "/add_store/" + x.aper_id + "/";
-                            } else if (document.getElementsByClassName("check")[i - 1].id == "sale") {
-                                document.getElementsByClassName("check")[i - 1].href = "/sale_view/" + x.aper_id + "/";
-                            } else if (document.getElementsByClassName("check")[i - 1].id == "aperture") {
-                                document.getElementsByClassName("check")[i - 1].href = "/aperture_detail/" + x.aper_id + "/";
-                            }
-                        } else {
-                            if (document.getElementsByClassName("check")[i].id == "add") {
-                                document.getElementsByClassName("check")[i].href = "/add_store/" + x.aper_id + "/";
-                            } else if (document.getElementsByClassName("check")[i].id == "sale") {
-                                document.getElementsByClassName("check")[i].href = "/sale_view/" + x.aper_id + "/";
-                            } else if (document.getElementsByClassName("check")[i].id == "aperture") {
-                                document.getElementsByClassName("check")[i].href = "/aperture_detail/" + x.aper_id + "/";
-                            }
+                        child = parent.cloneNode(child)
+                    }
+                    i = 0
+                    for (x of respnose.data.output) {
+                        document.getElementsByClassName("image")[i].src = "/media/" + x.aper_pic;
+                        document.getElementsByClassName("name")[i].innerHTML = x.aper_loc;
+                        document.getElementsByClassName("price")[i].innerHTML = "Price:" + x.aper_price + "Baht";
+                        if (document.getElementsByClassName("check")[i].id == "add") {
+                            document.getElementsByClassName("check")[i].href = "/add_store/" + x.aper_id + "/";
+                        } else if (document.getElementsByClassName("check")[i].id == "sale") {
+                            document.getElementsByClassName("check")[i].href = "/sale_view/" + x.aper_id + "/";
+                        } else if (document.getElementsByClassName("check")[i].id == "aperture") {
+                            document.getElementsByClassName("check")[i].href = "/aperture_detail/" + x.aper_id + "/";
                         }
-                        child = child.cloneNode(child)
-                        document.getElementById("image").src = "/media/" + x.aper_pic;
-                        document.getElementById("name").innerHTML = x.aper_loc;
-                        document.getElementById("price").innerHTML = "Price:" + x.aper_price + "Baht";
                         i++
                     }
                 }
