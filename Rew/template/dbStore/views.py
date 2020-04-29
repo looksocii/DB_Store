@@ -66,9 +66,6 @@ def my_logout(request):
     logout(request)
     return redirect('login')
 
-def change_password(request):
-    return render(request, 'change_password.html')
-
 def my_register(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -118,7 +115,7 @@ def store_detail(request, store_id):
     store = Store.objects.get(pk=store_id)
     try:
         
-        cost = Cost.objects.filter(store_store_id=store_id)
+        cost = Cost.objects.filter(store_store_id=store_id).latest('cost_id')
     except ObjectDoesNotExist:
         cost = None
     return render(request, 'store.html', {
@@ -314,7 +311,10 @@ def edit_expenses(request, store_id):
 #------------------------------------------------------- FORM ----------------------------------------------------------
 @csrf_exempt
 def storeApi(request):
+    cost = Store.objects.annotate(Count('cost')).values()
+    print(cost)
     liststore = list()
+    costlist = list()
     data = json.loads(request.body)
     if(data['search'].isnumeric()):
         store_all = Store.objects.filter(phone__contains=data['search']).values()
@@ -322,8 +322,14 @@ def storeApi(request):
         store_all = Store.objects.filter(store_name__contains=data['search'].lower()).values() | Store.objects.filter(store_name__contains=data['search'].upper()).values()
 
     for i in store_all:
+        for j in cost:
+            if(i["store_id"] == j['store_id']):
+                costlist.append(j)
         liststore.append(i)
-    print(liststore)
+    # print(liststore)
+    # for j in cost:
+    #     costlist.append(i)
+    print("costlist :", costlist)
 
 
 
@@ -334,7 +340,8 @@ def storeApi(request):
         return JsonResponse(response , status=200)
     else:
         response = {
-        'output': liststore
+        'output': liststore,
+        'cost' : costlist
         }
         return JsonResponse(response , status=200)
 
